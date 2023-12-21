@@ -30,6 +30,17 @@ const simulatingReadWrite = async (provider, options) => {
     await wait(delay2);
     await provider.vendor.sendPresenceUpdate("paused", $id);
 }
+
+const simulatingWriting = async (provider, options) => {
+    const {delay1, delay2, ctx} = options;
+    const $id = ctx?.key?.remoteJid;
+    await provider.vendor.presenceSubscribe($id);
+    await wait(delay1);
+    // simulare writing
+    await provider.vendor.sendPresenceUpdate("composing", $id);
+    await wait(delay2);
+    await provider.vendor.sendPresenceUpdate("paused", $id);
+}
 const formatMoney = (number) => {
     return number.toLocaleString("es-PE",
         {
@@ -96,6 +107,7 @@ module.exports = {
     formatMoney,
     regexPassword,
     simulatingReadWrite,
+    simulatingWriting,
     tryAgain,
     validateEmail,
     validateNumber,

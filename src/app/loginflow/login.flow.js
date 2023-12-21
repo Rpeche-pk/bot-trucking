@@ -3,12 +3,13 @@ const {
     validateEmail,
     wait,
     simulatingReadWrite,
+    simulatingWriting,
     regexPassword,
 } = require("../../helpers/helpers")
 const {startLogin} = require("../../http/login.http")
 const {menuOptions} = require("../menuflow/menu.flow")
 
-const validateInfo = addKeyword(EVENTS.ACTION)
+const validateInfo = addKeyword(EVENTS.ACTION,{})
     .addAction(async (ctx, {provider, state, gotoFlow}) => {
         const jid = ctx?.key?.remoteJid;
         const myState = state.getMyState();
@@ -20,11 +21,12 @@ const validateInfo = addKeyword(EVENTS.ACTION)
         const responseWA = await provider.vendor.sendMessage(jid, {text: `📌 Bienvenido ${name} ${lastName} de la compañia ${companyName} 🤝🏽`});
         await wait(500);
         await provider.vendor.sendMessage(jid, {react: {key: responseWA.key, text: "👍🏽"}});
+        await simulatingWriting(provider, {delay1: 500, delay2: 1100, ctx});
         await wait(500);
         await gotoFlow(menuOptions);
     });
 
-const loginFlow = addKeyword(EVENTS.ACTION)
+const loginFlow = addKeyword(EVENTS.ACTION,{})
     .addAnswer("📌╠ Ingrese su username o email:", {capture: true, delay: 500},
         async (ctx, {provider,fallBack, state}) => {
             const username = ctx?.body.trim();
@@ -56,7 +58,7 @@ const loginFlow = addKeyword(EVENTS.ACTION)
                 jid
             )
             await simulatingReadWrite(provider, {delay1: 500, delay2: 1100, ctx});
-            await provider.vendor.sendMessage(jid, {text: "👆🏽 Elimina el mensaje que enviaste, por seguridad 😉"});
+            await provider.vendor.sendMessage(jid, {text: "😉 Elimina el mensaje que enviaste, por seguridad 👆🏽"});
             await wait(1500);
             //provider.vendor.sendMessage(jid, { delete: reponseWA.key })
             //console.log("TIMESTAMP", new Date(Date.now() + 60 * 1000).getTime())

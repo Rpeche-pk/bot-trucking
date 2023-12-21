@@ -35,7 +35,7 @@ const onFlow = addKeyword(REGEX_KEYWORD, {regex: true}).addAction(async (ctx, {g
     }
 });
 
-const startChat = addKeyword(EVENTS.ACTION)
+const startChat = addKeyword(EVENTS.ACTION,{})
     .addAction(async (ctx, {provider, gotoFlow, flowDynamic,state}) => {
         try {
             await simulatingReadWrite(provider, {
@@ -63,14 +63,19 @@ const startChat = addKeyword(EVENTS.ACTION)
 ;
 
 
-const welcomeFlow = addKeyword([EVENTS.WELCOME, EVENTS.VOICE_NOTE])
+const welcomeFlow = addKeyword([EVENTS.WELCOME, EVENTS.VOICE_NOTE],{})
     .addAction(async (ctx, ctxFn) => {
         try {
             const phoneNumber = ctx?.from;
             console.log(`\nRevisando si ${phoneNumber} está encendido...`);
 
             const status = userPhone[phoneNumber];
-            console.log(status);
+            console.log("Estado del telefono ",phoneNumber,status);
+
+            /*if (!Object.prototype.hasOwnProperty.call(userPhone[phoneNumber], 'on')){
+                console.log("Añadiendo propiedad on ,welcomeFlow, no existe la propiedad on -> ", userPhone);
+                userPhone[phoneNumber] = {...userPhone[phoneNumber], on: true};
+            }*/
 
             if (typeof status === "undefined") {
                 //!estado || !estado.encendido

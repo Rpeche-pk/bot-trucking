@@ -1,13 +1,15 @@
-const {createBot, createProvider, createFlow, addKeyword} = require("@bot-whatsapp/bot");
 require("dotenv").config();
+const {createBot, createProvider, createFlow} = require("@bot-whatsapp/bot");
 const QRPortalWeb = require("@bot-whatsapp/portal");
 const BaileysProvider = require("@bot-whatsapp/provider/baileys");
 const JsonFileAdapter = require("@bot-whatsapp/database/json");
-const phoneNumber = process.env.PHONE_NUMBER;
 const {welcomeFlow, offFlow, onFlow, startChat} = require("./app/welcomeflow/welcome.flow");
 const {loginFlow, validateInfo} = require("./app/loginflow/login.flow")
 const {menuOptions} = require("./app/menuflow/menu.flow")
 const {employeeActiveFlow} = require("./app/optionsflow/employee.flow")
+const {chooseOption} = require("./app/optionsflow/option.flow")
+const {logoutFlow} = require("./app/optionsflow/signout.flow")
+const {vehicleActiveFlow,vehicleInactiveFlow} = require("./app/optionsflow/vehicle.flow")
 
 const main = async () => {
     const adapterDB = new JsonFileAdapter();
@@ -19,13 +21,17 @@ const main = async () => {
         loginFlow,
         validateInfo,
         menuOptions,
-        employeeActiveFlow
+        employeeActiveFlow,
+        chooseOption,
+        logoutFlow,
+        vehicleActiveFlow,
+        vehicleInactiveFlow
     ]
 
     const adapterFlow = createFlow([...flows]);
     const adapterProvider = createProvider(BaileysProvider, {
-        usePairingCode: true,
-        phoneNumber: phoneNumber,
+        usePairingCode: !!process.env.PHONE_NUMBER,
+        phoneNumber: process.env.PHONE_NUMBER || null,
         enabledCalls: true,
     });
 
@@ -43,4 +49,5 @@ const main = async () => {
     QRPortalWeb();
 };
 
-main().then(() => console.log("Bot iniciado correctamente 😎🚀🚀"));
+main().then(() => console.log("Bot iniciado correctamente 😎🚀"));
+//@AUTHOR: Luis Peche A. (@maipevi)

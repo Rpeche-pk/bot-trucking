@@ -4,6 +4,7 @@ bot_sessions/
 bot.qr.png
 db.json
 .vscode/
+.idea/
 # Default ignored files
 /shelf/
 /workspace.xml

@@ -2,10 +2,10 @@
   key: {
     remoteJid: '51966524537@s.whatsapp.net',
     fromMe: false,
-    id: '3EB032DAB693CA9327C65F',
+    id: '3EB0621D6461345804FBB8',
     participant: undefined
   },
-  messageTimestamp: 1703051752,
+  messageTimestamp: 1703134938,
   pushName: 'Gilmour Plant',
   broadcast: false,
   message: Message {
@@ -23,8 +23,8 @@
   from: '51966524537'
 }
 [QUEUE_SE_ENVIO]:  {
-  ref: 'ans_6e8a28e5-6653-4267-9332-fe92abe96f93',
-  keyword: 'key_61e87367-a84c-4607-beb2-7266102fdf7a',
+  ref: 'ans_84d2c417-dd99-4360-b945-a4ada381c3ab',
+  keyword: 'key_1a7008d3-47b9-41b1-99df-3bb8c1361bf4',
   answer: '__call_action__',
   options: {
     media: null,
@@ -38,21 +38,21 @@
     keyword: {},
     callback: true
   },
-  refSerialize: '8f9eb8b9186e8fa03b1b8c2cd3cb5beb'
+  refSerialize: '2bcf80dffc83256a70156ac073030384'
 }
 [handleMsg]:  {
   key: {
     remoteJid: '51966524537@s.whatsapp.net',
     fromMe: false,
-    id: '3EB01ACBB15B8C9845A3C3',
+    id: '3EB088F508BB0BBC641C50',
     participant: undefined
   },
-  messageTimestamp: 1703051758,
+  messageTimestamp: 1703134951,
   pushName: 'Gilmour Plant',
   broadcast: false,
   message: Message {
     extendedTextMessage: ExtendedTextMessage {
-      text: 'carlos@gmail.com',
+      text: 'jebius76@gmail.com',
       contextInfo: [ContextInfo],
       inviteLinkGroupTypeV2: 0
     },
@@ -61,12 +61,12 @@
       deviceListMetadataVersion: 2
     }
   },
-  body: 'carlos@gmail.com',
+  body: 'jebius76@gmail.com',
   from: '51966524537'
 }
 [QUEUE_SE_ENVIO]:  {
-  ref: 'ans_ca100bdf-d7e0-4bdc-a123-8c3c8181ce25',
-  keyword: 'ans_b8ba69d3-3a66-4d35-a8b4-df2f41a28f00',
+  ref: 'ans_b19b8867-ab9c-480d-b979-f4ca9bba020f',
+  keyword: 'ans_a0d2f8bf-163f-4298-8c29-3dbd6b05b948',
   answer: '📌╠ Ingrese su password:',
   options: {
     media: null,
@@ -80,16 +80,16 @@
     keyword: {},
     callback: true
   },
-  refSerialize: 'c1473cfa9e1f146af3fe2e4caa9a0462'
+  refSerialize: '1b3d7eea2b9c6824c8d7d3b586f70f93'
 }
 [handleMsg]:  {
   key: {
     remoteJid: '51966524537@s.whatsapp.net',
     fromMe: false,
-    id: '3EB0E44258CBF1F6F3BC07',
+    id: '3EB0F042F2F556BE565CA4',
     participant: undefined
   },
-  messageTimestamp: 1703051763,
+  messageTimestamp: 1703134959,
   pushName: 'Gilmour Plant',
   broadcast: false,
   message: Message {
@@ -110,10 +110,10 @@
   key: {
     remoteJid: '51966524537@s.whatsapp.net',
     fromMe: false,
-    id: '3EB078125A43F77003663D',
+    id: '3EB056C3CDC3D66A39F53C',
     participant: undefined
   },
-  messageTimestamp: 1703051773,
+  messageTimestamp: 1703134970,
   pushName: 'Gilmour Plant',
   broadcast: false,
   message: Message {
@@ -127,8 +127,8 @@
   from: '51966524537'
 }
 [QUEUE_SE_ENVIO]:  {
-  ref: 'ans_e3a2d334-0ac6-40d1-93cc-a67895a63ec8',
-  keyword: 'ans_ca100bdf-d7e0-4bdc-a123-8c3c8181ce25',
+  ref: 'ans_bd69df62-23f1-4a67-8594-a13955b49afa',
+  keyword: 'ans_b19b8867-ab9c-480d-b979-f4ca9bba020f',
   answer: '__call_action__',
   options: {
     media: null,
@@ -142,21 +142,21 @@
     keyword: {},
     callback: true
   },
-  refSerialize: '222213cb7f651406ae0053e7f483a42a'
+  refSerialize: 'd73a946994ae6d3a0f9c76997849bf97'
 }
 [handleMsg]:  {
   key: {
     remoteJid: '51966524537@s.whatsapp.net',
     fromMe: false,
-    id: '3EB06076FBAAFC8F03A501',
+    id: '3EB0703B9867FF743F9917',
     participant: undefined
   },
-  messageTimestamp: 1703051783,
+  messageTimestamp: 1703135064,
   pushName: 'Gilmour Plant',
   broadcast: false,
   message: Message {
     extendedTextMessage: ExtendedTextMessage {
-      text: '1',
+      text: '3',
       contextInfo: [ContextInfo],
       inviteLinkGroupTypeV2: 0
     },
@@ -165,6 +165,138 @@
       deviceListMetadataVersion: 2
     }
   },
-  body: '1',
+  body: '3',
   from: '51966524537'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '51966524537@s.whatsapp.net',
+    fromMe: false,
+    id: '3EB0FD0B2419AC9C125D30',
+    participant: undefined
+  },
+  messageTimestamp: 1703135080,
+  pushName: 'Gilmour Plant',
+  broadcast: false,
+  message: Message {
+    extendedTextMessage: ExtendedTextMessage {
+      text: '/menu',
+      contextInfo: [ContextInfo],
+      inviteLinkGroupTypeV2: 0
+    },
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: '/menu',
+  from: '51966524537'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '51966524537@s.whatsapp.net',
+    fromMe: false,
+    id: '3EB092BD8D101F56938793',
+    participant: undefined
+  },
+  messageTimestamp: 1703135086,
+  pushName: 'Gilmour Plant',
+  broadcast: false,
+  message: Message {
+    extendedTextMessage: ExtendedTextMessage {
+      text: '2',
+      contextInfo: [ContextInfo],
+      inviteLinkGroupTypeV2: 0
+    },
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: '2',
+  from: '51966524537'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '51966524537@s.whatsapp.net',
+    fromMe: false,
+    id: '3EB0C91FBFBBDB1D37AC65',
+    participant: undefined
+  },
+  messageTimestamp: 1703135120,
+  pushName: 'Gilmour Plant',
+  broadcast: false,
+  message: Message {
+    extendedTextMessage: ExtendedTextMessage {
+      text: '/salir',
+      contextInfo: [ContextInfo],
+      inviteLinkGroupTypeV2: 0
+    },
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: '/salir',
+  from: '51966524537'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '51966524537@s.whatsapp.net',
+    fromMe: false,
+    id: '3EB0ABCC329438809F132F',
+    participant: undefined
+  },
+  messageTimestamp: 1703135128,
+  pushName: 'Gilmour Plant',
+  broadcast: false,
+  message: Message {
+    extendedTextMessage: ExtendedTextMessage {
+      text: 'holaa',
+      contextInfo: [ContextInfo],
+      inviteLinkGroupTypeV2: 0
+    },
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: 'holaa',
+  from: '51966524537'
+}
+[QUEUE_SE_ENVIO]:  {
+  ref: 'ans_9a85cd33-a8bb-4c2b-8f35-f2bfb3264cd8',
+  keyword: 'key_593e9a33-e2d2-47b3-b98e-130a671ace28',
+  answer: '__call_action__',
+  options: {
+    media: null,
+    buttons: [],
+    capture: false,
+    child: null,
+    delay: 0,
+    idle: null,
+    ref: null,
+    nested: [],
+    keyword: {},
+    callback: true
+  },
+  refSerialize: 'ca3c7227eee7e1de3e34ca5629cff3de'
+}
+[QUEUE_SE_ENVIO]:  {
+  ref: 'ans_02e5f857-8d6b-4bcf-b507-0c0bd289c0f6',
+  keyword: 'ans_9a85cd33-a8bb-4c2b-8f35-f2bfb3264cd8',
+  answer: '💬 _Escribe_ *#empezar* _para_ _iniciar_ _la_ _conversación_ _dentro_ _del_ _sistema_ _trucking_ _o_ *#asesor* _para_ _escribirle_ _a_ _un_ _humano_',
+  options: {
+    media: null,
+    buttons: [],
+    capture: true,
+    child: null,
+    delay: 500,
+    idle: null,
+    ref: null,
+    nested: [],
+    keyword: {},
+    callback: false
+  },
+  refSerialize: 'f07a65b575afcfd877555ec71508f676'
 }
