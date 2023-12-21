@@ -1,6 +1,8 @@
 node_modules
 .env
 bot_sessions/
+core.class.log
+queue.class.log
 bot.qr.png
 db.json
 .vscode/

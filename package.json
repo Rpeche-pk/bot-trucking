@@ -6,7 +6,7 @@
     "scripts": {
         "pre-copy": "cd .. && npm run  copy.lib base-baileys-json",
         "trucking": "node ./src/app.js",
-        "dev": "nodemon ./src/app.js"
+        "start": "nodemon ./src/app.js"
     },
     "keywords": [],
     "dependencies": {

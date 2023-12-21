@@ -32,7 +32,7 @@ const main = async () => {
     const adapterProvider = createProvider(BaileysProvider, {
         usePairingCode: !!process.env.PHONE_NUMBER,
         phoneNumber: process.env.PHONE_NUMBER || null,
-        enabledCalls: true,
+        enabledCalls: true, //borrar esta opcion
     });
 
     const settings = {
@@ -51,3 +51,6 @@ const main = async () => {
 
 main().then(() => console.log("Bot iniciado correctamente 😎🚀"));
 //@AUTHOR: Luis Peche A. (@maipevi)
+//{
+//         clear: { messages: [{ id: message.id || "", fromMe: message.user.id == this.id, timestamp: Number(message.timestamp || Date.now()) }] },
+//       },
