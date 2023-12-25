@@ -63,7 +63,7 @@ const verifyToken = addKeyword(EVENTS.ACTION, {})
         }
         await extensions.utils.simulatingReadWrite(provider, {delay1: 500, delay2: 600, ctx});
         await provider.vendor.sendMessage(ctx.key.remoteJid, {
-            image: {url: "https://ik.imagekit.io/ljpa/zephyr-cygnus/imgBot/women.jpg"}, caption: "📌 Bienvenido de nuevo, ¿En qué puedo ayudarte?",
+            image: {url: "https://ik.imagekit.io/ljpa/zephyr-cygnus/imgBot/women.jpg"}, caption: "😉"+greeting[Math.floor(Math.random() * greeting.length)]+" Bienvenido de nuevo, ¿En qué puedo ayudarte?",
             mimetype: "image/jpeg",
         });
         //EL TOKEN QUE ESTA GUARDADO EN EL JSON Y NO HA EXPIRADO SE GUARDA EN EL ESTADO DEL USUARIO PARA PODER USARLO EN OTROS FLUJOS

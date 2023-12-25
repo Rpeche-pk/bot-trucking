@@ -2,10 +2,10 @@
   key: {
     remoteJid: '51966524537@s.whatsapp.net',
     fromMe: false,
-    id: '3EB0C4038778FB56C1789C',
+    id: '3EB01B2CCF34AD76A5272A',
     participant: undefined
   },
-  messageTimestamp: 1703465584,
+  messageTimestamp: 1703466024,
   pushName: 'Gilmour Plant',
   broadcast: false,
   message: Message {
@@ -23,8 +23,8 @@
   from: '51966524537'
 }
 [QUEUE_SE_ENVIO]:  {
-  ref: 'ans_1ae669e9-d4ae-4b53-803a-979c75429cbf',
-  keyword: 'key_db1d51cc-0b4d-449b-bc68-43e478a35cf0',
+  ref: 'ans_68980f80-d050-437c-8f5b-a0ab2a1f6fab',
+  keyword: 'key_fee2f3f0-e602-4b1b-bd7c-dee95ff88e78',
   answer: '__call_action__',
   options: {
     media: null,
@@ -38,16 +38,16 @@
     keyword: {},
     callback: true
   },
-  refSerialize: '5491f653fea9ab320116f6420307c5e2'
+  refSerialize: '64213535a152c269fca16b88447d523a'
 }
 [handleMsg]:  {
   key: {
     remoteJid: '51966524537@s.whatsapp.net',
     fromMe: false,
-    id: '3EB0F97EE1E1359EDBECDA',
+    id: '3EB022E8138AE3CA474DCC',
     participant: undefined
   },
-  messageTimestamp: 1703465592,
+  messageTimestamp: 1703466256,
   pushName: 'Gilmour Plant',
   broadcast: false,
   message: Message {
