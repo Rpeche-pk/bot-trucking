@@ -44,7 +44,9 @@ class Helpers {
     simulatingWriting = async (provider, options) => {
         const {delay1, delay2, ctx} = options;
         const $id = ctx?.key?.remoteJid;
+        console.log("ID", $id)
         await provider.vendor.presenceSubscribe($id);
+        console.log("ID", $id)
         await this.wait(delay1);
         // simulare writing
         await provider.vendor.sendPresenceUpdate("composing", $id);
@@ -157,5 +159,7 @@ class Helpers {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     };
 }
+const newInstance = new Helpers();
+Object.freeze(newInstance)
 
-module.exports = Helpers;
+module.exports = newInstance;

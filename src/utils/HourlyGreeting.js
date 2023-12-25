@@ -1,22 +1,24 @@
-const moment = require("moment");
+const moment = require("moment-timezone");
 
 const randomGreeting = () => {
   // Crea un objeto con las variantes de hora y saludos
   const saludos = {
-    "06:00-12:00": ["*_Buenos días_*", "*_Buenos Días_* 🌤"],
-    "12:00-18:00": ["*_Buenas tardes_*", "*_Buenas Tardes_* ⛅"],
-    "18:00-23:59": ["*_Buenas noches_*", "*_Buenas Noches_* 🌚"],
-    "00:00-06:00": ["*_El que madruga Dios lo ayuda_*","*_Buena Amanecida_* ☕"],
+    "06:00-12:00": ["*Buenos días*", "*Buenos Días* 🌤"],
+    "12:00-18:00": ["*Buenas tardes*", "*Buenas Tardes* ⛅"],
+    "18:00-23:59": ["*Buenas noches*", "*Buenas Noches* 🌚"],
+    "00:00-06:00": ["*El que madruga Dios lo ayuda*","*Buena Amanecida* ☕"],
   };
 
-  const horaActual = moment();
+  // Especifica la zona horaria (por ejemplo, "America/Lima")
+  const zonaHoraria = "America/Lima";
+  const horaActual = moment().tz(zonaHoraria);
 
   let saludo;
 
   for (let clave in saludos) {
     let rangoHorario = clave.split("-");
-    let horaInicio = moment(rangoHorario[0], "HH:mm");
-    let horaFin = moment(rangoHorario[1], "HH:mm");
+    let horaInicio = moment.tz(rangoHorario[0], "HH:mm", zonaHoraria);
+    let horaFin = moment.tz(rangoHorario[1], "HH:mm", zonaHoraria);
     if (horaActual.isBetween(horaInicio, horaFin)) {
       saludo = saludos[clave];
       console.log(saludo);

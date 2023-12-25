@@ -23,7 +23,7 @@
         "jwt-decode": "^4.0.0",
         "link-preview-js": "^3.0.5",
         "mime-types": "2.1.35",
-        "moment": "^2.29.4",
+        "moment-timezone": "^0.5.43",
         "speakeasy": "^2.0.0",
         "wa-sticker-formatter": "4.4.4"
     },

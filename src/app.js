@@ -10,7 +10,7 @@ const {employeeActiveFlow} = require("./app/optionsflow/employee.flow")
 const {chooseOption} = require("./app/optionsflow/option.flow")
 const {logoutFlow} = require("./app/optionsflow/signout.flow")
 const {vehicleActiveFlow,vehicleInactiveFlow} = require("./app/optionsflow/vehicle.flow")
-const Helpers = require("./helpers/helpers");
+const newInstance = require("./helpers/helpers");
 
 const main = async () => {
     const adapterDB = new JsonFileAdapter();
@@ -43,7 +43,7 @@ const main = async () => {
         //     concurrencyLimit: 15,
         // },
         extensions: {
-            utils: new Helpers()
+            utils: newInstance
         }
     }
     createBot({

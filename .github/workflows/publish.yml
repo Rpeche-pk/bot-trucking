@@ -36,10 +36,7 @@ jobs:
       # run: mkdir -p backend/app
 
       - name: Enter to the directory
-        run: cd /home/lrpa/
-
-        #- name: Permises docker
-        #run: sudo chmod 666 /var/run/docker.sock
+        run: cd /home/lrpa/Escritorio/trucking-bot
 
       - name: Docker Instance Stop and remove
         run: docker rm -f zephyr-cygnus-bot
@@ -51,6 +48,7 @@ jobs:
         run: |
           docker run -d \
           -e "PHONE_NUMBER=51979838018" \
+          -v "/home/lrpa/Escritorio/trucking-bot:/app/bot_sessions" \
           --restart always \
           --name zephyr-cygnus-bot \
           -p3000:3000 \

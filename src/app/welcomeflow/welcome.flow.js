@@ -55,16 +55,18 @@ const verifyToken = addKeyword(EVENTS.ACTION, {})
         console.log("TOKEN", token)
 
         if (!token) {
+            await extensions.utils.simulatingWriting(provider, {delay1: 500, delay2: 700, ctx});
             await flowDynamic([{body: "😿 no se encuentra *registrado* *ingrese* a -> https://s12-14-t-java-react.vercel.app/ y luego *rellene* *los campos*"}]);
             return gotoFlow(startChat);
         }
         if (expiredToken(token)) {
+            await extensions.utils.simulatingWriting(provider, {delay1: 500, delay2: 750, ctx});
             await flowDynamic([{body: "Oops 😿, su sesión ha expirado, por favor vuelva a iniciar sesión."}]);
             return gotoFlow(startChat);
         }
-        await extensions.utils.simulatingReadWrite(provider, {delay1: 500, delay2: 600, ctx});
+        await extensions.utils.simulatingReadWrite(provider, {delay1: 500, delay2: 700, ctx});
         await provider.vendor.sendMessage(ctx.key.remoteJid, {
-            image: {url: `${randomImage}`}, caption: "😉"+greeting[Math.floor(Math.random() * greeting.length)]+" Bienvenido de nuevo, ¿En qué puedo ayudarte?",
+            image: {url: `${randomImage}`}, caption: "😉 "+greeting[Math.floor(Math.random() * greeting.length)]+" Bienvenido de nuevo, ¿En qué puedo ayudarte?",
             mimetype: "image/jpeg",
         });
         //EL TOKEN QUE ESTA GUARDADO EN EL JSON Y NO HA EXPIRADO SE GUARDA EN EL ESTADO DEL USUARIO PARA PODER USARLO EN OTROS FLUJOS
@@ -79,7 +81,7 @@ const startChat = addKeyword(EVENTS.ACTION, {})
             const randomImage = randomImages(URL_IMAGE_BOT);
             await extensions.utils.simulatingReadWrite(provider, {
                 delay1: 500,
-                delay2: 1500,
+                delay2: 1350,
                 ctx
             });
             await flowDynamic([
