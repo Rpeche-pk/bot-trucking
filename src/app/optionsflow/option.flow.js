@@ -6,8 +6,8 @@ const REGEX_EXIT = /\/salir/i;
 const chooseOption = addKeyword(EVENTS.ACTION, {})
     .addAnswer([
         "💁🏽‍♀️ Si desea hacer otra consulta, escriba:",
-        "╠*/menu* - Para volver al menú principal",
-        "╙*/salir* - Para salir del sistema",
+        "╠/*menu* - Para volver al menú principal",
+        "╙/*salir* - Para salir del sistema",
     ], {capture: true, delay: 1000},async (ctx, {fallBack, provider, gotoFlow}) => {
         const {menuOptions} = require("../menuflow/menu.flow")
         const {logoutFlow} = require("../optionsflow/signout.flow")

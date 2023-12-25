@@ -3,13 +3,14 @@ const {createBot, createProvider, createFlow} = require("@bot-whatsapp/bot");
 const QRPortalWeb = require("@bot-whatsapp/portal");
 const BaileysProvider = require("@bot-whatsapp/provider/baileys");
 const JsonFileAdapter = require("@bot-whatsapp/database/json");
-const {welcomeFlow, offFlow, onFlow, startChat} = require("./app/welcomeflow/welcome.flow");
+const {welcomeFlow, offFlow, onFlow, startChat,verifyToken} = require("./app/welcomeflow/welcome.flow");
 const {loginFlow, validateInfo} = require("./app/loginflow/login.flow")
 const {menuOptions} = require("./app/menuflow/menu.flow")
 const {employeeActiveFlow} = require("./app/optionsflow/employee.flow")
 const {chooseOption} = require("./app/optionsflow/option.flow")
 const {logoutFlow} = require("./app/optionsflow/signout.flow")
 const {vehicleActiveFlow,vehicleInactiveFlow} = require("./app/optionsflow/vehicle.flow")
+const Helpers = require("./helpers/helpers");
 
 const main = async () => {
     const adapterDB = new JsonFileAdapter();
@@ -25,7 +26,8 @@ const main = async () => {
         chooseOption,
         logoutFlow,
         vehicleActiveFlow,
-        vehicleInactiveFlow
+        vehicleInactiveFlow,
+        verifyToken
     ]
 
     const adapterFlow = createFlow([...flows]);
@@ -36,17 +38,20 @@ const main = async () => {
     });
 
     const settings = {
-        queue: {
-            timeout: 25000,
-            concurrencyLimit: 15,
+        // queue: {
+        //     timeout: 25000,
+        //     concurrencyLimit: 15,
+        // },
+        extensions: {
+            utils: new Helpers()
         }
     }
     createBot({
         flow: adapterFlow,
         provider: adapterProvider,
         database: adapterDB,
-    });
-    QRPortalWeb();
+    },settings);
+    //QRPortalWeb();
 };
 
 main().then(() => console.log("Bot iniciado correctamente 😎🚀"));

@@ -6,7 +6,7 @@
     "scripts": {
         "pre-copy": "cd .. && npm run  copy.lib base-baileys-json",
         "trucking": "node ./src/app.js",
-        "start": "nodemon ./src/app.js"
+        "start": "node ./src/app.js"
     },
     "keywords": [],
     "dependencies": {
@@ -17,18 +17,19 @@
         "@bot-whatsapp/provider": "latest",
         "@whiskeysockets/baileys": "6.5.0",
         "axios": "^1.6.2",
+        "bcrypt": "^5.1.1",
         "cache-manager": "5.2.4",
         "dotenv": "^16.3.1",
         "jwt-decode": "^4.0.0",
         "link-preview-js": "^3.0.5",
         "mime-types": "2.1.35",
         "moment": "^2.29.4",
+        "speakeasy": "^2.0.0",
         "wa-sticker-formatter": "4.4.4"
     },
     "devDependencies": {
         "eslint": "^8.52.0",
-        "eslint-plugin-bot-whatsapp": "latest",
-        "nodemon": "^3.0.2"
+        "eslint-plugin-bot-whatsapp": "latest"
     },
     "author": "",
     "license": "ISC"

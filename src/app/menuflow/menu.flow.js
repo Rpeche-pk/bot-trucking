@@ -1,5 +1,4 @@
-const {addKeyword, EVENTS} = require("@bot-whatsapp/bot");
-const {validateNumber, tryAgain, wait} = require("../../helpers/helpers")
+const {addKeyword} = require("@bot-whatsapp/bot");
 const {employeeActiveFlow} = require("../optionsflow/employee.flow")
 const {logoutFlow} = require("../optionsflow/signout.flow")
 const {vehicleActiveFlow,vehicleInactiveFlow} = require("../optionsflow/vehicle.flow")
@@ -15,13 +14,14 @@ const menuOptions = addKeyword("/menu", {})
             "╠6️⃣ Agregar registro de *mantenimiento*",
             "╠7️⃣ Eliminar *empleado*",
             "╚8️⃣ *Salir*",
-        ], {capture: true, delay: 700, sensitive: true},
+        ], {capture: true, delay: 500, sensitive: true},
         async (ctx, ctxFn) => {
             const state = ctxFn.state.getMyState();
+            const jid= ctx?.key?.remoteJid;
             const answer = ctx?.body.trim();
-            await wait(500);
-            if (!validateNumber(answer)) {
-                await tryAgain(intents, ctxFn, {state, ctx});
+            await ctxFn.extensions.utils.wait(500);
+            if (!ctxFn.extensions.utils.validateNumber(answer)) {
+                await ctxFn.extensions.utils.tryAgain(intents, ctxFn, {state, ctx});
                 intents--;
             }
 
@@ -40,16 +40,19 @@ const menuOptions = addKeyword("/menu", {})
                     break;
                 case "4":
                     console.log("4️⃣ Dar de baja un vehículo")
-                    break;
+                    await ctxFn.provider.vendor.sendMessage(jid, {text: "📌 Aún falta implementar esta funcionalidad"});
+                    return ctxFn.endFlow();
                 case "5":
                     console.log("5️⃣ Dar de baja un vehículo")
-                    break;
+                    await ctxFn.provider.vendor.sendMessage(jid, {text: "📌 Aún falta implementar esta funcionalidad"});
+                    return ctxFn.endFlow();
                 case "6":
-                    console.log("6️⃣ Agregar registro de mantenimiento")
-                    break;
+                    await ctxFn.provider.vendor.sendMessage(jid, {text: "📌 Aún falta implementar esta funcionalidad"});
+                    return ctxFn.endFlow();
                 case "7":
                     console.log("8️⃣ Eliminar empleado")
-                    break;
+                    await ctxFn.provider.vendor.sendMessage(jid, {text: "📌 Aún falta implementar esta funcionalidad"});
+                    return ctxFn.endFlow();
                 case "8":
                     console.log("SALIR DEL SISTEMA - ON")
                     await ctxFn.gotoFlow(logoutFlow);
