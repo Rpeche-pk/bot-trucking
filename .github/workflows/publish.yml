@@ -51,7 +51,6 @@ jobs:
         run: |
           docker run -d \
           -e "PHONE_NUMBER=51979838018" \
-          -e "URL_ENDPOINT=https://trucking-jebius.koyeb.app/api/v1" \ 
           --restart always \
           --name zephyr-cygnus-bot \
           -p3000:3000 \
