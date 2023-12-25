@@ -7,7 +7,7 @@ const {loginFlow} = require("../loginflow/login.flow")
 const {menuOptions} = require("../menuflow/menu.flow");
 
 
-const {URL_IMAGE_BOT} = ENV();
+const {URL_IMAGE_BOT, URL_IMAGE_BOT2} = ENV();
 const REGEX_ASESOR = "/#(asesor)$/g";
 const REGEX_KEYWORD = "/#(empezar)$/g";
 
@@ -41,6 +41,7 @@ const onFlow = addKeyword(REGEX_KEYWORD, {regex: true}).addAction(async (ctx, {g
 //3° Si el usuario ya está registrado se ejecuta este flujo para verificar si el token ha expirado o no y si no ha expirado se guarda en el estado del usuario
 const verifyToken = addKeyword(EVENTS.ACTION, {})
     .addAction(async (ctx, {extensions, provider, gotoFlow, flowDynamic, state}) => {
+        const randomImage = randomImages(URL_IMAGE_BOT2);
         const fileUser = `src/app/data/${ctx?.from}.json`;
         const myState = state.getMyState();
         //VERIFICAMOS SI EL USUARIO YA ESTA REGISTRADO EN EL JSON DE USUARIOS Y SI EXISTE EL ARCHIVO JSON DE USUARIOS EN EL SISTEMA DE ARCHIVOS
@@ -63,7 +64,7 @@ const verifyToken = addKeyword(EVENTS.ACTION, {})
         }
         await extensions.utils.simulatingReadWrite(provider, {delay1: 500, delay2: 600, ctx});
         await provider.vendor.sendMessage(ctx.key.remoteJid, {
-            image: {url: "https://ik.imagekit.io/ljpa/zephyr-cygnus/imgBot/women.jpg"}, caption: "😉"+greeting[Math.floor(Math.random() * greeting.length)]+" Bienvenido de nuevo, ¿En qué puedo ayudarte?",
+            image: {url: `${randomImage}`}, caption: "😉"+greeting[Math.floor(Math.random() * greeting.length)]+" Bienvenido de nuevo, ¿En qué puedo ayudarte?",
             mimetype: "image/jpeg",
         });
         //EL TOKEN QUE ESTA GUARDADO EN EL JSON Y NO HA EXPIRADO SE GUARDA EN EL ESTADO DEL USUARIO PARA PODER USARLO EN OTROS FLUJOS
@@ -75,7 +76,7 @@ const verifyToken = addKeyword(EVENTS.ACTION, {})
 const startChat = addKeyword(EVENTS.ACTION, {})
     .addAction(async (ctx, {extensions, provider, gotoFlow, flowDynamic, state}) => {
         try {
-            const randomImage = randomImages();
+            const randomImage = randomImages(URL_IMAGE_BOT);
             await extensions.utils.simulatingReadWrite(provider, {
                 delay1: 500,
                 delay2: 1500,
@@ -181,8 +182,8 @@ const welcomeFlow = addKeyword([EVENTS.WELCOME, EVENTS.VOICE_NOTE], {})
 
     });
 
-function randomImages() {
-    return URL_IMAGE_BOT[Math.floor(Math.random() * URL_IMAGE_BOT.length)];
+function randomImages(URL_IMAGE) {
+    return URL_IMAGE[Math.floor(Math.random() * URL_IMAGE.length)];
 }
 
 function expiredToken(token) {
