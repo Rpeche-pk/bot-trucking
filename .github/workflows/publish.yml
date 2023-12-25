@@ -1,0 +1,56 @@
+name: Build and Deploy zephyr cygnus bot
+
+on:
+  push:
+    branches: [develop,main]
+
+jobs:
+  build-docker:
+    name: Build and deploy to Docker Hub
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.TOKEN_DOCKER }}
+
+      - name: Build and push docker hub
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          dockerfile: Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/trucking-bot:latest
+
+  deploy:
+    name: Deploy to server exe
+    needs: build-docker
+    runs-on: self-hosted #ubuntu-latest
+
+    steps:
+      #- name: Create directory work
+      # run: mkdir -p backend/app
+
+      - name: Enter to the directory
+        run: cd /home/lrpa/
+
+        #- name: Permises docker
+        #run: sudo chmod 666 /var/run/docker.sock
+
+      - name: Docker Instance Stop and remove
+        run: docker rm -f zephyr-cygnus-bot
+
+      - name: Docker pull image
+        run: docker pull ${{ secrets.DOCKERHUB_USERNAME }}/trucking-bot:latest
+
+      - name: Docker run image
+        run: |
+          docker run -d \
+          --restart always \
+          --name zephyr-cygnus-bot \
+          -p3000:3000 \
+          ${{ secrets.DOCKERHUB_USERNAME }}/trucking-bot:latest
