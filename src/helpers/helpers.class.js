@@ -1,11 +1,11 @@
 const fs = require("fs").promises;
 
-class Helpers {
+class HelpersClass {
     constructor() {
-        if (!Helpers.instance) {
-            Helpers.instance = this;
+        if (!HelpersClass.instance) {
+            HelpersClass.instance = this;
         }
-        return Helpers.instance;
+        return HelpersClass.instance;
     }
 
     /**
@@ -43,10 +43,8 @@ class Helpers {
 
     simulatingWriting = async (provider, options) => {
         const {delay1, delay2, ctx} = options;
-        const $id = ctx?.key?.remoteJid;
-        console.log("ID", $id)
+        const $id = ctx?.key?.remoteJid
         await provider.vendor.presenceSubscribe($id);
-        console.log("ID", $id)
         await this.wait(delay1);
         // simulare writing
         await provider.vendor.sendPresenceUpdate("composing", $id);
@@ -159,7 +157,7 @@ class Helpers {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     };
 }
-const newInstance = new Helpers();
+const newInstance = new HelpersClass();
 Object.freeze(newInstance)
 
 module.exports = newInstance;

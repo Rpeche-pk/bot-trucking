@@ -1,5 +1,5 @@
 const fs = require("fs");
-const { wait } = require("../helpers/helpers.js");
+const { wait } = require("../helpers/helpers.class.js");
 class CoreBaileys {
   #sock = undefined;
   #provider = undefined;

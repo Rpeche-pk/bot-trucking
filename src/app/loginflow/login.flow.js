@@ -2,10 +2,12 @@ const {addKeyword, EVENTS} = require("@bot-whatsapp/bot");
 const {startLogin} = require("../../http/login.http")
 const {menuOptions} = require("../menuflow/menu.flow")
 const {hashPassword} = require("../../helpers/encryptCredentials")
+const {idleReset, idleStop} = require("../../utils/idle.util");
 
 // Validate info user
 const validateInfo = addKeyword(EVENTS.ACTION, {})
     .addAction(async (ctx, {extensions,provider, state, gotoFlow}) => {
+        idleStop(ctx);
         const jid = ctx?.key?.remoteJid;
         const idUser= ctx?.from;
         const myState = state.getMyState();
@@ -29,7 +31,8 @@ const validateInfo = addKeyword(EVENTS.ACTION, {})
 
 const loginFlow = addKeyword(EVENTS.ACTION, {})
     .addAnswer("📌╠ Ingrese su username o email:", {capture: true, delay: 500},
-        async (ctx, {extensions,provider, fallBack, state}) => {
+        async (ctx, {extensions,provider, fallBack, globalState,state,gotoFlow}) => {
+            idleReset(ctx, gotoFlow, globalState.getMyState().timer);
             const username = ctx?.body.trim();
             const from = ctx?.from
             const myState = state.getMyState();
@@ -40,7 +43,8 @@ const loginFlow = addKeyword(EVENTS.ACTION, {})
             await extensions.utils.simulatingReadWrite(provider, {delay1: 500, delay2: 1100, ctx})
         })
     .addAnswer("📌╠ Ingrese su password:", {capture: true},
-        async (ctx, {extensions,provider, state, fallBack}) => {
+        async (ctx, {extensions,provider, globalState, state, fallBack,gotoFlow}) => {
+            idleReset(ctx, gotoFlow, globalState.getMyState().timer);
             const password = ctx?.body.trim();
             const jid = ctx?.key?.remoteJid;
             const id = ctx?.key?.id;

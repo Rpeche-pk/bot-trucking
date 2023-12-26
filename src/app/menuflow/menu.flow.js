@@ -2,8 +2,12 @@ const {addKeyword} = require("@bot-whatsapp/bot");
 const {employeeActiveFlow} = require("../optionsflow/employee.flow")
 const {logoutFlow} = require("../optionsflow/signout.flow")
 const {vehicleActiveFlow,vehicleInactiveFlow} = require("../optionsflow/vehicle.flow")
+const {idleReset, idleStop, idleStart} = require("../../utils/idle.util");
 let intents = 2;
 const menuOptions = addKeyword("/menu", {})
+    .addAction(async (ctx, {gotoFlow, globalState}) => {
+        idleStart(ctx, gotoFlow, globalState.getMyState().timer);
+    })
     .addAnswer([
             "📌Ingrese una opción, por favor:",
             "╠1️⃣ Consultar empleados *activos*",
@@ -20,6 +24,7 @@ const menuOptions = addKeyword("/menu", {})
             const jid= ctx?.key?.remoteJid;
             const answer = ctx?.body.trim();
             await ctxFn.extensions.utils.wait(500);
+            await ctxFn.provider.vendor.sendMessage(jid, {react: {key: ctx?.key, text: "💯"}});
             if (!ctxFn.extensions.utils.validateNumber(answer)) {
                 await ctxFn.extensions.utils.tryAgain(intents, ctxFn, {state, ctx});
                 intents--;
@@ -28,13 +33,16 @@ const menuOptions = addKeyword("/menu", {})
             switch (answer) {
                 case "1":
                     console.log("1️⃣ Consultar empleados activos")
+                    idleStop(ctx)
                     await ctxFn.gotoFlow(employeeActiveFlow);
                     break;
                 case "2":
+                    idleStop(ctx)
                     console.log("2️⃣ Consultar vehiculos activos")
                     await ctxFn.gotoFlow(vehicleActiveFlow)
                     break;
                 case "3":
+                    idleStop(ctx)
                     console.log("3️⃣ Consultar vehiculos inactivos")
                     await ctxFn.gotoFlow(vehicleInactiveFlow)
                     break;

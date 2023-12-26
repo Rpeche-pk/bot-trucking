@@ -2,16 +2,15 @@
   key: {
     remoteJid: '51966524537@s.whatsapp.net',
     fromMe: false,
-    id: '129485E725DBAD2C5D003107F557E91F',
+    id: '3EB0E6F4A21937519255F5',
     participant: undefined
   },
-  messageTimestamp: 1703538658,
+  messageTimestamp: 1703564678,
   pushName: 'Gilmour Plant',
   broadcast: false,
   message: Message {
     extendedTextMessage: ExtendedTextMessage {
       text: '#empezar',
-      previewType: 0,
       contextInfo: [ContextInfo],
       inviteLinkGroupTypeV2: 0
     },
@@ -24,8 +23,8 @@
   from: '51966524537'
 }
 [QUEUE_SE_ENVIO]:  {
-  ref: 'ans_062f875f-30a9-4047-ac0e-233a94561a2b',
-  keyword: 'key_70ee6135-8f95-46dd-a91f-96fd2b512ff3',
+  ref: 'ans_bd1e379c-7324-4ec4-a3aa-1270c92b4ac4',
+  keyword: 'key_6021046d-d9fa-49cb-b8f4-8e5ca2fd80e6',
   answer: '__call_action__',
   options: {
     media: null,
@@ -39,5 +38,113 @@
     keyword: {},
     callback: true
   },
-  refSerialize: '197398bf035d15e6c63bf374f26aa741'
+  refSerialize: '52ef0869052c3abdd45984bfd6fc8a4f'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '51966524537@s.whatsapp.net',
+    fromMe: false,
+    id: '3EB0436C727682981B9933',
+    participant: undefined
+  },
+  messageTimestamp: 1703564693,
+  pushName: 'Gilmour Plant',
+  broadcast: false,
+  message: Message {
+    extendedTextMessage: ExtendedTextMessage {
+      text: 'carlos@gmail.com',
+      contextInfo: [ContextInfo],
+      inviteLinkGroupTypeV2: 0
+    },
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: 'carlos@gmail.com',
+  from: '51966524537'
+}
+[QUEUE_SE_ENVIO]:  {
+  ref: 'ans_dbf216a7-ab00-4fe5-a291-1f2a022eedb6',
+  keyword: 'ans_19b76724-cee1-451f-afa9-a7e423f874ff',
+  answer: '📌╠ Ingrese su password:',
+  options: {
+    media: null,
+    buttons: [],
+    capture: true,
+    child: null,
+    delay: 0,
+    idle: null,
+    ref: null,
+    nested: [],
+    keyword: {},
+    callback: true
+  },
+  refSerialize: '8eb0b4285316cc43a2345bb4ba9ecd71'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '51966524537@s.whatsapp.net',
+    fromMe: false,
+    id: '3EB0CBD5AC11D8858A3710',
+    participant: undefined
+  },
+  messageTimestamp: 1703564701,
+  pushName: 'Gilmour Plant',
+  broadcast: false,
+  message: Message {
+    extendedTextMessage: ExtendedTextMessage {
+      text: 'Abcdef123@',
+      contextInfo: [ContextInfo],
+      inviteLinkGroupTypeV2: 0
+    },
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: 'Abcdef123@',
+  from: '51966524537'
+}
+[QUEUE_SE_ENVIO]:  {
+  ref: 'ans_e2de3d91-bb4d-4ca6-b988-7cb8f208e5ee',
+  keyword: 'ans_dbf216a7-ab00-4fe5-a291-1f2a022eedb6',
+  answer: '__call_action__',
+  options: {
+    media: null,
+    buttons: [],
+    capture: false,
+    child: null,
+    delay: 0,
+    idle: null,
+    ref: null,
+    nested: [],
+    keyword: {},
+    callback: true
+  },
+  refSerialize: '91ca3048c1b56416bdec4e48accb3f71'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '51966524537@s.whatsapp.net',
+    fromMe: false,
+    id: '3EB0028CA46CFE1EE7B1A4',
+    participant: undefined
+  },
+  messageTimestamp: 1703564720,
+  pushName: 'Gilmour Plant',
+  broadcast: false,
+  message: Message {
+    extendedTextMessage: ExtendedTextMessage {
+      text: '1',
+      contextInfo: [ContextInfo],
+      inviteLinkGroupTypeV2: 0
+    },
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: '1',
+  from: '51966524537'
 }

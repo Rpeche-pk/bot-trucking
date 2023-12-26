@@ -1,6 +1,6 @@
 require("dotenv").config();
 const {createBot, createProvider, createFlow} = require("@bot-whatsapp/bot");
-const QRPortalWeb = require("@bot-whatsapp/portal");
+//const QRPortalWeb = require("@bot-whatsapp/portal");
 const BaileysProvider = require("@bot-whatsapp/provider/baileys");
 const JsonFileAdapter = require("@bot-whatsapp/database/json");
 const {welcomeFlow, offFlow, onFlow, startChat,verifyToken} = require("./app/welcomeflow/welcome.flow");
@@ -8,9 +8,9 @@ const {loginFlow, validateInfo} = require("./app/loginflow/login.flow")
 const {menuOptions} = require("./app/menuflow/menu.flow")
 const {employeeActiveFlow} = require("./app/optionsflow/employee.flow")
 const {chooseOption} = require("./app/optionsflow/option.flow")
-const {logoutFlow} = require("./app/optionsflow/signout.flow")
+const {logoutFlow,timeoutFlow} = require("./app/optionsflow/signout.flow")
 const {vehicleActiveFlow,vehicleInactiveFlow} = require("./app/optionsflow/vehicle.flow")
-const newInstance = require("./helpers/helpers");
+const newInstance = require("./helpers/helpers.class");
 
 const main = async () => {
     const adapterDB = new JsonFileAdapter();
@@ -27,7 +27,8 @@ const main = async () => {
         logoutFlow,
         vehicleActiveFlow,
         vehicleInactiveFlow,
-        verifyToken
+        verifyToken,
+        timeoutFlow
     ]
 
     const adapterFlow = createFlow([...flows]);
@@ -44,7 +45,11 @@ const main = async () => {
         // },
         extensions: {
             utils: newInstance
+        },
+        globalState: {
+            timer: 20000, //300000 -> 5 minutos
         }
+
     }
     createBot({
         flow: adapterFlow,

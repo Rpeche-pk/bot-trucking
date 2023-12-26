@@ -2,11 +2,11 @@ const {addKeyword, EVENTS} = require("@bot-whatsapp/bot");
 const ENV = require("../../utils/enviroments.js");
 const randomGreeting = require("../../utils/HourlyGreeting.js");
 const {jwtDecode} = require("jwt-decode");
-const greeting = randomGreeting();
 const {loginFlow} = require("../loginflow/login.flow")
 const {menuOptions} = require("../menuflow/menu.flow");
+const {idleStart, idleStop,idleReset} = require("../../utils/idle.util");
 
-
+const greeting = randomGreeting();
 const {URL_IMAGE_BOT, URL_IMAGE_BOT2} = ENV();
 const REGEX_ASESOR = "/#(asesor)$/g";
 const REGEX_KEYWORD = "/#(empezar)$/g";
@@ -40,7 +40,7 @@ const onFlow = addKeyword(REGEX_KEYWORD, {regex: true}).addAction(async (ctx, {g
 
 //3° Si el usuario ya está registrado se ejecuta este flujo para verificar si el token ha expirado o no y si no ha expirado se guarda en el estado del usuario
 const verifyToken = addKeyword(EVENTS.ACTION, {})
-    .addAction(async (ctx, {extensions, provider, gotoFlow, flowDynamic, state}) => {
+    .addAction(async (ctx, {extensions,provider, gotoFlow, flowDynamic, state}) => {
         const randomImage = randomImages(URL_IMAGE_BOT2);
         const fileUser = `src/app/data/${ctx?.from}.json`;
         const myState = state.getMyState();
@@ -76,7 +76,7 @@ const verifyToken = addKeyword(EVENTS.ACTION, {})
 
 //4° Si el usuario no está registrado se ejecuta este flujo
 const startChat = addKeyword(EVENTS.ACTION, {})
-    .addAction(async (ctx, {extensions, provider, gotoFlow, flowDynamic, state}) => {
+    .addAction(async (ctx, {extensions, provider, gotoFlow, flowDynamic,globalState, state}) => {
         try {
             const randomImage = randomImages(URL_IMAGE_BOT);
             await extensions.utils.simulatingReadWrite(provider, {
@@ -138,10 +138,15 @@ const welcomeFlow = addKeyword([EVENTS.WELCOME, EVENTS.VOICE_NOTE], {})
             console.error("ERROR FLUJO welcomeFlow", error);
         }
     })
+    .addAction(async (ctx, {gotoFlow, globalState}) => {
+        const TIMER = globalState.getMyState().timer;
+        idleStart(ctx, gotoFlow,TIMER);
+    })
     .addAnswer(
         "💬 _Escribe_ *#empezar* _para_ _iniciar_ _la_ _conversación_ _dentro_ _del_ _sistema_ _trucking_ _o_ *#asesor* _para_ _escribirle_ _a_ _un_ _humano_",
-        {delay: 500, capture: true}
-    ).addAction(async (ctx, {extensions, state, provider, fallBack, flowDynamic, endFlow, gotoFlow}) => {
+        {capture: true, ref: "welcomeFlow ejecutado"}
+    ).addAction(async (ctx, {extensions, globalState,state, provider, fallBack, flowDynamic, endFlow, gotoFlow}) => {
+        idleReset(ctx, gotoFlow,globalState.getMyState().timer);
         const answer = ctx?.body.trim();
         const phoneNumber = ctx?.from;
         const id = ctx?.key?.remoteJid
@@ -150,8 +155,10 @@ const welcomeFlow = addKeyword([EVENTS.WELCOME, EVENTS.VOICE_NOTE], {})
             if (answer.includes("#asesor") || answer.includes("#empezar")) {
                 switch (answer) {
                     case "#asesor":
+                        idleStop(ctx);
                         return gotoFlow(offFlow);
                     case "#empezar":
+                        idleStop(ctx);
                         return gotoFlow(onFlow);
                     default:
                         break;
