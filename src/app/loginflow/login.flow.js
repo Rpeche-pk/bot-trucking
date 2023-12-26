@@ -2,7 +2,7 @@ const {addKeyword, EVENTS} = require("@bot-whatsapp/bot");
 const {startLogin} = require("../../http/login.http")
 const {menuOptions} = require("../menuflow/menu.flow")
 const {hashPassword} = require("../../helpers/encryptCredentials")
-const {idleReset, idleStop} = require("../../utils/idle.util");
+const {idleReset, idleStop, idleStart} = require("../../utils/idle.util");
 
 // Validate info user
 const validateInfo = addKeyword(EVENTS.ACTION, {})
@@ -30,6 +30,9 @@ const validateInfo = addKeyword(EVENTS.ACTION, {})
     });
 
 const loginFlow = addKeyword(EVENTS.ACTION, {})
+    .addAction(async (ctx, {gotoFlow,globalState}) => {
+        idleStart(ctx, gotoFlow, globalState.getMyState().timer);
+    })
     .addAnswer("📌╠ Ingrese su username o email:", {capture: true, delay: 500},
         async (ctx, {extensions,provider, fallBack, globalState,state,gotoFlow}) => {
             idleReset(ctx, gotoFlow, globalState.getMyState().timer);

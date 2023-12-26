@@ -47,7 +47,7 @@ const main = async () => {
             utils: newInstance
         },
         globalState: {
-            timer: 20000, //300000 -> 5 minutos
+            timer: 120000, //300000 -> 5 minutos
         }
 
     }

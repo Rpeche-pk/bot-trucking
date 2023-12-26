@@ -9,8 +9,8 @@ const chooseOption = addKeyword(EVENTS.ACTION, {})
     })
     .addAnswer([
         "💁🏽‍♀️ Si desea hacer otra consulta, escriba:",
-        "╠/*menu* - Para volver al menú principal",
-        "╙/*salir* - Para salir del sistema",
+        "╠ /menu - Para volver al menú principal",
+        "╙ /salir - Para salir del sistema",
     ], {capture: true, delay: 1000},async (ctx, {fallBack, provider,globalState, gotoFlow}) => {
         idleReset(ctx, gotoFlow,globalState.getMyState().timer);
         const {menuOptions} = require("../menuflow/menu.flow")

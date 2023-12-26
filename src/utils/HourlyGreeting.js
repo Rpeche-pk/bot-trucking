@@ -27,6 +27,7 @@ const randomGreeting = () => {
     };
 
     const horaActual = getLocalTime();
+    console.log("HORA ACTUAL",horaActual)
     let saludo;
 
     for (let clave in saludos) {
