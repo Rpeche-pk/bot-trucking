@@ -51,8 +51,22 @@ class VehicleHttp {
         }
     };
 
+    deleteVehicle = async (id) => {
+        try {
+            const bearerToken = this.token ? `Bearer ${this.token}` : ''
+            const config = {
+                headers: {
+                    Authorization: `${bearerToken}`
+                }
+            }
+            const {data} = await api.delete(`/vehicle/${id}`, config);
+            console.log(data)
+            return data;
+        } catch (error) {
+            console.error("Oops algo salio mal ", error.message)
+        }
+    }
+
 }
 
-module.exports = {
-    VehicleHttp
-};
+module.exports = VehicleHttp;

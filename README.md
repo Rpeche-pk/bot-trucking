@@ -1,7 +1,7 @@
-### CHATBOT Whatsapp (Baileys Provider)
+### CHATBOT Trucking Gestión de vehiculos(Baileys Provider)
 
 <p align="center">
-  <img width="300" src="https://i.imgur.com/Oauef6t.png">
+  <img src="https://ik.imagekit.io/ljpa/Proyectos/logo_trucking.png">
 </p>
 
 

@@ -1,5 +1,5 @@
 const {addKeyword, EVENTS} = require("@bot-whatsapp/bot");
-const {VehicleHttp} = require("../../http/vehicle.http")
+const VehicleHttp = require("../../http/vehicle.http")
 
 const vehicleInactiveFlow = addKeyword(EVENTS.ACTION, {})
     .addAction(async (ctx, {extensions,provider, state, gotoFlow}) => {

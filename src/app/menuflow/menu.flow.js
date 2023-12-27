@@ -3,6 +3,7 @@ const {employeeActiveFlow} = require("../optionsflow/employee.flow")
 const {logoutFlow} = require("../optionsflow/signout.flow")
 const {vehicleActiveFlow,vehicleInactiveFlow} = require("../optionsflow/vehicle.flow")
 const {idleReset, idleStop, idleStart} = require("../../utils/idle.util");
+const Strategy= require("./strategy/Strategy.class");
 let intents = 2;
 const menuOptions = addKeyword("/menu", {})
     .addAction(async (ctx, {gotoFlow, globalState}) => {
@@ -29,46 +30,9 @@ const menuOptions = addKeyword("/menu", {})
                 await ctxFn.extensions.utils.tryAgain(intents, ctxFn, {state, ctx});
                 intents--;
             }
-
-            switch (answer) {
-                case "1":
-                    console.log("1️⃣ Consultar empleados activos")
-                    idleStop(ctx)
-                    await ctxFn.gotoFlow(employeeActiveFlow);
-                    break;
-                case "2":
-                    idleStop(ctx)
-                    console.log("2️⃣ Consultar vehiculos activos")
-                    await ctxFn.gotoFlow(vehicleActiveFlow)
-                    break;
-                case "3":
-                    idleStop(ctx)
-                    console.log("3️⃣ Consultar vehiculos inactivos")
-                    await ctxFn.gotoFlow(vehicleInactiveFlow)
-                    break;
-                case "4":
-                    console.log("4️⃣ Dar de baja un vehículo")
-                    await ctxFn.provider.vendor.sendMessage(jid, {text: "📌 Aún falta implementar esta funcionalidad"});
-                    return ctxFn.endFlow();
-                case "5":
-                    console.log("5️⃣ Dar de baja un vehículo")
-                    await ctxFn.provider.vendor.sendMessage(jid, {text: "📌 Aún falta implementar esta funcionalidad"});
-                    return ctxFn.endFlow();
-                case "6":
-                    await ctxFn.provider.vendor.sendMessage(jid, {text: "📌 Aún falta implementar esta funcionalidad"});
-                    return ctxFn.endFlow();
-                case "7":
-                    console.log("8️⃣ Eliminar empleado")
-                    await ctxFn.provider.vendor.sendMessage(jid, {text: "📌 Aún falta implementar esta funcionalidad"});
-                    return ctxFn.endFlow();
-                case "8":
-                    console.log("SALIR DEL SISTEMA - ON")
-                    await ctxFn.gotoFlow(logoutFlow);
-                    break;
-                default:
-                    console.error("Error en menuOptions");
-                    return;
-            }
+            const strategy = new Strategy();
+            const strategyMethod = strategy[`case${answer}`] || strategy.default();
+            await strategyMethod(ctx, ctxFn);
         });
 
 
