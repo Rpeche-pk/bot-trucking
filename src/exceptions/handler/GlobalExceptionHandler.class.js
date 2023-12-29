@@ -7,4 +7,16 @@ class GlobalExceptionHandler extends Error{
     }
 }
 
-module.exports = GlobalExceptionHandler;
+class VehicleNotFoundException extends GlobalExceptionHandler{
+    constructor(message) {
+        super(message);
+    }
+}
+
+class OptionNotValidException extends GlobalExceptionHandler{
+    constructor(message) {
+        super(message);
+    }
+}
+
+module.exports = VehicleNotFoundException;

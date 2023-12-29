@@ -1,7 +1,7 @@
 ### CHATBOT Trucking Gestión de vehiculos(Baileys Provider)
 
-<p align="center">
-  <img src="https://ik.imagekit.io/ljpa/Proyectos/logo_trucking.png">
+<p>
+  <img src="https://ik.imagekit.io/ljpa/Proyectos/logo_trucking.png" alt="Architecture">
 </p>
 
 

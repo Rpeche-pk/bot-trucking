@@ -41,6 +41,12 @@ class HelpersClass {
         await provider.vendor.sendPresenceUpdate("paused", $id);
     }
 
+    /**
+     *
+     * @param provider
+     * @param options
+     * @returns {Promise<void>}
+     */
     simulatingWriting = async (provider, options) => {
         const {delay1, delay2, ctx} = options;
         const $id = ctx?.key?.remoteJid
@@ -59,21 +65,36 @@ class HelpersClass {
             });
     }
 
+    /**
+     *
+     * @param email
+     * @returns {boolean}
+     */
     validateEmail = (email) => {
-        const re = /^([a-zA-Z0-9]+(?:[._+-][a-zA-Z0-9]+)*)@([a-zA-Z0-9]+(?:[.-][a-zA-Z0-9]+)*[.][a-zA-Z]{2,})$/;
+        const re = new RegExp(/^([a-zA-Z0-9]+(?:[._+-][a-zA-Z0-9]+)*)@([a-zA-Z0-9]+(?:[.-][a-zA-Z0-9]+)*[.][a-zA-Z]{2,})$/);
         return re.test(email);
     }
 
+    /**
+     *
+     * @param password
+     * @returns {boolean}
+     */
     regexPassword = (password) => {
-        const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$%&()*+\/?@[\\\]^_{|}]).{8,}$/;
+        const re = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$%&()*+\/?@[\\\]^_{|}]).{8,}$/);
         return re.test(password);
     }
 
-
+    /**
+     *
+     * @param input
+     * @returns {boolean}
+     */
     validateNumber = (input) => {
-        const regex = /^[1-9]$|^10$/;
+        const regex =new RegExp(/^[1-9]$|^10$/);
         return regex.test(input);
     };
+
 
     formatDateToMs = (date) => {
         // Configura la zona horaria para Lima, Perú (UTC-5)
@@ -86,7 +107,13 @@ class HelpersClass {
         //         timeZone: 'America/Lima'
         //     });
     }
-
+    /**
+     *
+     * @param intents
+     * @param ctxFn
+     * @param options
+     * @returns {Promise<*>}
+     */
     tryAgain = async (intents, ctxFn, options) => {
         const {ctx, state} = options;
 
@@ -94,21 +121,30 @@ class HelpersClass {
             let msgIntents = intents === 1 ? "Tienes 1 intento." : `Tienes ${intents} intentos.`;
             await this.simulatingReadWrite(ctxFn.provider, {
                 delay1: 500,
-                delay2: 1300,
+                delay2: 1100,
                 ctx
             });
             return ctxFn.fallBack({body: msgIntents});
         } else {
+            if (!state[ctx?.from]) {
+                state[ctx?.from] = {};
+            }
             state[ctx?.from] = {...state[ctx?.from], on: false};
             await this.simulatingReadWrite(ctxFn.provider, {
                 delay1: 500,
-                delay2: 1200,
+                delay2: 1150,
                 ctx
             });
             await ctxFn.provider.vendor.sendMessage(ctx?.key?.remoteJid, {text: "❌ Su solicitud ha sido cancelada ❌ , escriba #empezar"}, {quoted: ctx});
             return ctxFn.endFlow();
         }
     }
+    /**
+     *
+     * @param file
+     * @param data
+     * @returns {Promise<void>}
+     */
     writeFile = async (file, data) => {
         new Promise((resolve, reject) => {
             fs.writeFile(file, JSON.stringify(data, null, 2), (err) => {
@@ -118,6 +154,11 @@ class HelpersClass {
         });
     };
 
+    /**
+     *
+     * @param file
+     * @returns {Promise<any>}
+     */
     readFile = async (file) => {
         try {
             const data = await fs.readFile(file, 'utf8');
@@ -128,6 +169,12 @@ class HelpersClass {
         }
     };
 
+    /**
+     *
+     * @param ctx
+     * @param file
+     * @returns {Promise<void>}
+     */
     existsFile = async (ctx, file) => {
         const template = {
             [ctx?.from]: {
@@ -153,11 +200,8 @@ class HelpersClass {
             await fs.writeFile(file, JSON.stringify(template,null,2));
         }
     }
-    getRandomDelay = (min, max) => {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    };
 }
 const newInstance = new HelpersClass();
-Object.freeze(newInstance)
+//Object.freeze(newInstance)
 
 module.exports = newInstance;

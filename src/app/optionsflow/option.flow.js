@@ -4,13 +4,14 @@ const REGEX_MENU = /\/menu/i;
 const REGEX_EXIT = /\/salir/i;
 
 const chooseOption = addKeyword(EVENTS.ACTION, {})
-    .addAction(async (ctx, {gotoFlow, globalState}) => {
+    .addAction(async (ctx, {extensions,provider, gotoFlow, globalState}) => {
         idleStart(ctx, gotoFlow, globalState.getMyState().timer);
+        await extensions.utils.simulatingWriting(provider, {delay1: 500, delay2: 800, ctx})
     })
     .addAnswer([
         "💁🏽‍♀️ Si desea hacer otra consulta, escriba:",
-        "╠ /menu - Para volver al menú principal",
-        "╙ /salir - Para salir del sistema",
+        "╠ Escriba /menu ,para volver al menú principal",
+        "╙ Escriba /salir ,para salir del sistema",
     ], {capture: true, delay: 1000},async (ctx, {fallBack, provider,globalState, gotoFlow}) => {
         idleReset(ctx, gotoFlow,globalState.getMyState().timer);
         const {menuOptions} = require("../menuflow/menu.flow")

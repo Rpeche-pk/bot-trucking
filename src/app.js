@@ -9,7 +9,8 @@ const {menuOptions} = require("./app/menuflow/menu.flow")
 const {employeeActiveFlow} = require("./app/optionsflow/employee.flow")
 const {chooseOption} = require("./app/optionsflow/option.flow")
 const {logoutFlow,timeoutFlow} = require("./app/optionsflow/signout.flow")
-const {vehicleActiveFlow,vehicleInactiveFlow} = require("./app/optionsflow/vehicle.flow")
+const {vehicleActiveFlow,vehicleInactiveFlow,vehicleDeleteFlow} = require("./app/optionsflow/vehicle.flow")
+const {vehicleCreateFlow} = require("./app/optionsflow/createVehicle.flow")
 const newInstance = require("./helpers/helpers.class");
 
 const main = async () => {
@@ -27,8 +28,10 @@ const main = async () => {
         logoutFlow,
         vehicleActiveFlow,
         vehicleInactiveFlow,
+        vehicleDeleteFlow,
         verifyToken,
-        timeoutFlow
+        timeoutFlow,
+        vehicleCreateFlow
     ]
 
     const adapterFlow = createFlow([...flows]);

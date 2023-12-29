@@ -26,10 +26,11 @@ const offFlow = addKeyword(REGEX_ASESOR, {regex: true}).addAction(async (ctx, {f
     }
 });
 
-const onFlow = addKeyword(REGEX_KEYWORD, {regex: true}).addAction(async (ctx, {gotoFlow, state}) => {
+const onFlow = addKeyword(REGEX_KEYWORD, {regex: true}).addAction(async (ctx, {provider,extensions,gotoFlow, state}) => {
     try {
         userPhone[ctx.from] = {...userPhone[ctx.from], on: true};
         await state.update(userPhone);
+        await extensions.utils.simulatingWriting(provider, {delay1: 500, delay2: 800, ctx});
         console.log("BOT ENCENDIDO-> ", userPhone);
         return gotoFlow(verifyToken);
     } catch (error) {
@@ -55,16 +56,16 @@ const verifyToken = addKeyword(EVENTS.ACTION, {})
         console.log("TOKEN", token)
 
         if (!token) {
-            await extensions.utils.simulatingWriting(provider, {delay1: 500, delay2: 700, ctx});
+            await extensions.utils.simulatingWriting(provider, {delay1: 500, delay2: 850, ctx});
             await flowDynamic([{body: "😿 no se encuentra *registrado* *ingrese* a -> https://s12-14-t-java-react.vercel.app/ y luego *rellene* *los campos*"}]);
             return gotoFlow(startChat);
         }
         if (expiredToken(token)) {
-            await extensions.utils.simulatingWriting(provider, {delay1: 500, delay2: 750, ctx});
+            await extensions.utils.simulatingWriting(provider, {delay1: 500, delay2: 800, ctx});
             await flowDynamic([{body: "Oops 😿, su sesión ha expirado, por favor vuelva a iniciar sesión."}]);
             return gotoFlow(startChat);
         }
-        await extensions.utils.simulatingReadWrite(provider, {delay1: 500, delay2: 700, ctx});
+        await extensions.utils.simulatingReadWrite(provider, {delay1: 500, delay2: 900, ctx});
         await provider.vendor.sendMessage(ctx.key.remoteJid, {
             image: {url: `${randomImage}`}, caption: "😉 "+greeting[Math.floor(Math.random() * greeting.length)]+" Bienvenido de nuevo, ¿En qué puedo ayudarte?",
             mimetype: "image/jpeg",
@@ -76,12 +77,12 @@ const verifyToken = addKeyword(EVENTS.ACTION, {})
 
 //4° Si el usuario no está registrado se ejecuta este flujo
 const startChat = addKeyword(EVENTS.ACTION, {})
-    .addAction(async (ctx, {extensions, provider, gotoFlow, flowDynamic,globalState, state}) => {
+    .addAction(async (ctx, {extensions, provider, gotoFlow, flowDynamic, state}) => {
         try {
             const randomImage = randomImages(URL_IMAGE_BOT);
             await extensions.utils.simulatingReadWrite(provider, {
                 delay1: 500,
-                delay2: 1350,
+                delay2: 1000,
                 ctx
             });
             await flowDynamic([
