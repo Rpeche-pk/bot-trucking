@@ -9,7 +9,14 @@ const ENV = () => {
         URL_IMAGE_BOT2: ["https://ik.imagekit.io/ljpa/zephyr-cygnus/imgBot/women3.jpg"
             , "https://ik.imagekit.io/ljpa/zephyr-cygnus/imgBot/women2.jpg"
             , "https://ik.imagekit.io/ljpa/zephyr-cygnus/imgBot/women1.jpg"
-            , "https://ik.imagekit.io/ljpa/zephyr-cygnus/imgBot/women.jpg"],
+            , "https://ik.imagekit.io/ljpa/zephyr-cygnus/imgBot/women.jpg"
+            , "https://ik.imagekit.io/ljpa/zephyr-cygnus/imgBot/IA5.jpg"
+            , "https://ik.imagekit.io/ljpa/zephyr-cygnus/imgBot/IA3.jpg"
+            , "https://ik.imagekit.io/ljpa/zephyr-cygnus/imgBot/IA2.jpg"
+            , "https://ik.imagekit.io/ljpa/zephyr-cygnus/imgBot/IA7.jpg"
+            , "https://ik.imagekit.io/ljpa/zephyr-cygnus/imgBot/ia4.jpg"
+            , "https://ik.imagekit.io/ljpa/zephyr-cygnus/imgBot/IA.jpg"
+            , "https://ik.imagekit.io/ljpa/zephyr-cygnus/imgBot/ia6.jpg"],
         URL_CATALOG: "https://wa.me/c/51968036430",
         URL_CALL: "https://call.whatsapp.com/voice/GjrW5NDT5YGnbEdZ2ByhgF",
         SPRING_API_URL: "https://trucking-jebius.koyeb.app/api/v1",
