@@ -52,7 +52,7 @@ jobs:
           -e PUBLIC_KEY_IMAGEKIT=${{secrets.PUBLIC_KEY_IMAGEKIT}} \
           -e PRIVATE_KEY_IMAGEKIT=${{secrets.PRIVATE_KEY_IMAGEKIT}} \
           -e "URL_ENDPOINT_IMAGEKIT=https://ik.imagekit.io/ljpa/" \
-          -v "/home/lrpa/Escritorio/trucking-bot:/app/bot_sessions" \
+          -v "/home/lrpa/Escritorio/trucking-bot:/app/bot_sessions/ls" \
           --restart always \
           --name zephyr-cygnus-bot \
           -p3000:3000 \
