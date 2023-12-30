@@ -6,11 +6,14 @@ const logoutFlow = addKeyword(EVENTS.ACTION,{})
             const from = ctx?.from;
             const jid= ctx?.key?.remoteJid;
             const myState = state.getMyState();
+            await provider.vendor.readMessages([ctx?.key]);
             myState[from] = {...myState[from], on: false}
             console.log("BOT APAGADO desde flujo LogoutFlow-> ", myState);
-            await extensions.utils.simulatingReadWrite(provider, {delay1: 500, delay2: 1200, ctx});
+            await extensions.utils.simulatingWriting(provider, {delay1: 558, delay2: 1000, ctx});
             await flowDynamic([{body:"Gracias por usar nuestros servicios, hasta pronto 👋🏽"}]);
+            await extensions.utils.simulatingWriting(provider, {delay1: 559, delay2: 850, ctx});
             await flowDynamic([{body:"👾 @Author @Rpeche-pk"}]);
+            await extensions.utils.simulatingWriting(provider, {delay1: 550, delay2: 1100, ctx});
             await provider.vendor.sendMessage(jid, {
                 text: "https://github.com/Rpeche-pk",
             });

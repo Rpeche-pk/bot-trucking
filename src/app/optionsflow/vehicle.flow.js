@@ -11,6 +11,7 @@ const vehicleDeleteFlow = addKeyword(EVENTS.ACTION, {})
         , async (ctx, {extensions, provider, state,gotoFlow, endFlow}) => {
             try {
                 const {chooseOption} = require("../optionsflow/option.flow");
+                await provider.vendor.readMessages([ctx?.key]);
                 const jid = ctx?.key?.remoteJid;
                 const idVehicle = ctx?.body.trim();
                 const token = extractToken(ctx, state);
@@ -18,10 +19,11 @@ const vehicleDeleteFlow = addKeyword(EVENTS.ACTION, {})
                 // todo lanza un exception personalizado si no encuentra el vehiculo
                 await instance.deleteVehicle(idVehicle);
 
-                await extensions.utils.simulatingReadWrite(provider, {delay1: 500, delay2: 1100, ctx});
+                await extensions.utils.simulatingWriting(provider, {delay1: 500, delay2: 1100, ctx});
                 const responseWA = await provider.vendor.sendMessage(jid, {"text": "📌_Vehiculo_ _eliminado_ _con_ _éxito_"});
                 await provider.vendor.sendMessage(jid, {react: {key: responseWA?.key, text: "✅"}});
                 await extensions.utils.wait(500);
+                await extensions.utils.simulatingWriting(provider, {delay1: 500, delay2: 1100, ctx});
                 await gotoFlow(chooseOption);
             } catch (e) {
                 console.error("ERROR FLUJO vehicleDeleteFlow", e.message)
@@ -42,12 +44,14 @@ const vehicleInactiveFlow = addKeyword(EVENTS.ACTION, {})
             provider,
             extensions
         })
+        await extensions.utils.simulatingWriting(provider, {delay1: 560, delay2: 1110, ctx});
         await gotoFlow(chooseOption);
     });
 
 const vehicleActiveFlow = addKeyword(EVENTS.ACTION, {})
     .addAction(async (ctx, {extensions, provider, state, gotoFlow}) => {
         const {chooseOption} = require("../optionsflow/option.flow")
+        await provider.vendor.readMessages([ctx?.key]);
         const token = extractToken(ctx, state);
         await extensions.utils.wait(450);
         const instance = new VehicleHttp(token, "ACTIVE");
@@ -57,6 +61,7 @@ const vehicleActiveFlow = addKeyword(EVENTS.ACTION, {})
             provider,
             extensions
         })
+        await extensions.utils.simulatingWriting(provider, {delay1: 550, delay2: 1100, ctx});
         await gotoFlow(chooseOption);
     });
 
@@ -77,9 +82,9 @@ async function vehicleStatus(obj) {
         const template = `╓ *Detalles* : ${brand} - ${model} - ${year}\n╠ *Vehiculo* : ${vehicleType} \n╠ *Placa* : ${patent}\n╙ *Chasis N°* : ${numberChassis}`;
         data.push(template);
     });
-    await extensions.utils.simulatingReadWrite(provider, {delay1: getRandomDelay(800,700), delay2: getRandomDelay(1200,900), ctx});
+    await extensions.utils.simulatingWriting(provider, {delay1: getRandomDelay(800,700), delay2: getRandomDelay(1200,900), ctx});
     await provider.vendor.sendMessage(jid, {text: `📌 _Cantidad de_ _vehiculos_ _${flag}_: ` + "*"+responseApi.length+"*"});
-    await extensions.utils.simulatingReadWrite(provider, {delay1: getRandomDelay(950,750), delay2: getRandomDelay(1300,1000), ctx});
+    await extensions.utils.simulatingWriting(provider, {delay1: getRandomDelay(950,750), delay2: getRandomDelay(1300,1000), ctx});
     await provider.vendor.sendMessage(jid, {text: data.join("\n\n")});
     await extensions.utils.wait(550);
 }

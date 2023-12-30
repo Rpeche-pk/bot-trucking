@@ -12,7 +12,7 @@ const chooseOption = addKeyword(EVENTS.ACTION, {})
         "💁🏽‍♀️ Si desea hacer otra consulta, escriba:",
         "╠ Escriba /menu ,para volver al menú principal",
         "╙ Escriba /salir ,para salir del sistema",
-    ], {capture: true, delay: 1000},async (ctx, {fallBack, provider,globalState, gotoFlow}) => {
+    ], {capture: true, delay: 1000},async (ctx, {extensions,fallBack, provider,globalState, gotoFlow}) => {
         idleReset(ctx, gotoFlow,globalState.getMyState().timer);
         const {menuOptions} = require("../menuflow/menu.flow")
         const {logoutFlow} = require("../optionsflow/signout.flow")
@@ -27,11 +27,13 @@ const chooseOption = addKeyword(EVENTS.ACTION, {})
             case "/menu":
                 console.log("Escribió /menu")
                 idleStop(ctx)
+                await extensions.utils.simulatingWriting(provider, {delay1: 650, delay2: 1000, ctx})
                 await gotoFlow(menuOptions);
                 break;
             case "/salir":
-                idleStop(ctx)
                 console.log("/salir")
+                idleStop(ctx)
+                await extensions.utils.simulatingWriting(provider, {delay1: 500, delay2: 900, ctx})
                 await gotoFlow(logoutFlow);
                 break;
             default:

@@ -47,6 +47,7 @@ const vehicleValidateDataFlow = addKeyword(EVENTS.ACTION, {})
         await ctxFn.extensions.utils.simulatingWriting(ctxFn.provider, {delay1: 600, delay2: 950, ctx});
         await ctxFn.flowDynamic([{body: "📌 _Vehiculo_ _agregado_ _con_ _éxito_"}]);
         idleStop(ctx);
+        await ctxFn.extensions.utils.simulatingWriting(ctxFn.provider, {delay1: 720, delay2: 1150, ctx});
         return ctxFn.gotoFlow(chooseOption);
     })
 

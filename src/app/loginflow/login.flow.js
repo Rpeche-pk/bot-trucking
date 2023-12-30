@@ -8,32 +8,37 @@ const ENV = require("../../utils/enviroments.js");
 const {URL_IMAGE_BOT2} = ENV();
 // Validate info user
 const validateInfo = addKeyword(EVENTS.ACTION, {})
-    .addAction(async (ctx, {extensions, provider, state, gotoFlow, flowDynamic}) => {
-        idleStop(ctx);
-        const jid = ctx?.key?.remoteJid;
-        const idUser = ctx?.from;
-        const myState = state.getMyState();
-        const {email, password} = myState[ctx?.from];
-        const response = await startLogin(email, password);
-        const {name, lastName, companyName} = response.user;
-        //ENCRIPTAMOS EL PASSWORD POR SEGURIDAD
-        const encryptPass = await hashPassword(password)
-        myState[ctx?.from] = {...myState[ctx?.from], password: encryptPass, token: response.token};
-        //GUARDAMOS EL ESTADO DEL USUARIO EN UN ARCHIVO JSON
-        await extensions.utils.writeFile(`src/app/data/${idUser}.json`, myState);
-        await extensions.utils.simulatingReadWrite(provider, {delay1: 500, delay2: 1000, ctx})
-        const responseWA = await provider.vendor.sendMessage(jid,
-            {
-                image: {url: URL_IMAGE_BOT2[Math.floor(Math.random() * URL_IMAGE_BOT2.length)]},
-                caption: `📌 Bienvenido ${name} ${lastName} de la compañia ${companyName} 🤝🏽`,
-                jpegThumbnail: "image/jpeg"
-            });
-        await extensions.utils.wait(500);
-        await provider.vendor.sendMessage(jid, {react: {key: responseWA.key, text: "👍🏽"}});
-        await extensions.utils.simulatingWriting(provider, {delay1: 500, delay2: 1100, ctx});
-        await extensions.utils.wait(500);
-        console.log("ESTADO DESDE VALIDATE INFO", myState)
-        await gotoFlow(menuOptions);
+    .addAction(async (ctx, {extensions, provider, state, gotoFlow}) => {
+        try {
+            idleStop(ctx);
+            const randomImage = randomImagesIA(URL_IMAGE_BOT2);
+            const jid = ctx?.key?.remoteJid;
+            const idUser = ctx?.from;
+            const myState = state.getMyState();
+            const {email, password} = myState[ctx?.from];
+            const response = await startLogin(email, password);
+            const {name, lastName, companyName} = response.user;
+            //ENCRIPTAMOS EL PASSWORD POR SEGURIDAD
+            const encryptPass = await hashPassword(password)
+            myState[ctx?.from] = {...myState[ctx?.from], password: encryptPass, token: response.token};
+            //GUARDAMOS EL ESTADO DEL USUARIO EN UN ARCHIVO JSON
+            await extensions.utils.writeFile(`src/app/data/${idUser}.json`, myState);
+            await extensions.utils.simulatingReadWrite(provider, {delay1: 500, delay2: 1000, ctx})
+            const responseWA = await provider.vendor.sendMessage(jid,
+                {
+                    image: {url: `${randomImage}`},
+                    caption: `📌 Bienvenido ${name} ${lastName} de la compañia ${companyName} 🤝🏽`,
+                    mimetype: "image/jpeg"
+                });
+            await extensions.utils.wait(500);
+            await provider.vendor.sendMessage(jid, {react: {key: responseWA.key, text: "👍🏽"}});
+            await extensions.utils.simulatingWriting(provider, {delay1: 500, delay2: 1100, ctx});
+            await extensions.utils.wait(500);
+            console.log("ESTADO DESDE VALIDATE INFO", myState)
+            await gotoFlow(menuOptions);
+        } catch (e) {
+            console.error("ERROR FLUJO validateInfo", e);
+        }
     });
 
 const loginFlow = addKeyword(EVENTS.ACTION, {})
@@ -97,4 +102,10 @@ const loginFlow = addKeyword(EVENTS.ACTION, {})
             console.error("ERROR FLUJO loginFlow", e);
         }
     });
+
+
+function randomImagesIA(URL_IMAGE) {
+    return URL_IMAGE[Math.floor(Math.random() * URL_IMAGE.length)];
+}
+
 module.exports = {loginFlow, validateInfo};

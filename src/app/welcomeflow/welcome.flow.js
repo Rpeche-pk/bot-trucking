@@ -30,7 +30,6 @@ const onFlow = addKeyword(REGEX_KEYWORD, {regex: true}).addAction(async (ctx, {p
     try {
         userPhone[ctx.from] = {...userPhone[ctx.from], on: true};
         await state.update(userPhone);
-        await extensions.utils.simulatingWriting(provider, {delay1: 500, delay2: 800, ctx});
         console.log("BOT ENCENDIDO-> ", userPhone);
         return gotoFlow(verifyToken);
     } catch (error) {
@@ -45,6 +44,7 @@ const verifyToken = addKeyword(EVENTS.ACTION, {})
         const randomImage = randomImages(URL_IMAGE_BOT2);
         const fileUser = `src/app/data/${ctx?.from}.json`;
         const myState = state.getMyState();
+        await provider.vendor.readMessages([ctx?.key]);
         //VERIFICAMOS SI EL USUARIO YA ESTA REGISTRADO EN EL JSON DE USUARIOS Y SI EXISTE EL ARCHIVO JSON DE USUARIOS EN EL SISTEMA DE ARCHIVOS
         await extensions.utils.existsFile(ctx, fileUser);
 
@@ -61,17 +61,18 @@ const verifyToken = addKeyword(EVENTS.ACTION, {})
             return gotoFlow(startChat);
         }
         if (expiredToken(token)) {
-            await extensions.utils.simulatingWriting(provider, {delay1: 500, delay2: 800, ctx});
+            await extensions.utils.simulatingWriting(provider, {delay1: 500, delay2: 850, ctx});
             await flowDynamic([{body: "Oops 😿, su sesión ha expirado, por favor vuelva a iniciar sesión."}]);
             return gotoFlow(startChat);
         }
-        await extensions.utils.simulatingReadWrite(provider, {delay1: 500, delay2: 900, ctx});
+        await extensions.utils.simulatingWriting(provider, {delay1: 550, delay2: 950, ctx});
         await provider.vendor.sendMessage(ctx.key.remoteJid, {
             image: {url: `${randomImage}`}, caption: "😉 "+greeting[Math.floor(Math.random() * greeting.length)]+" Bienvenido de nuevo, ¿En qué puedo ayudarte?",
             mimetype: "image/jpeg",
         });
         //EL TOKEN QUE ESTA GUARDADO EN EL JSON Y NO HA EXPIRADO SE GUARDA EN EL ESTADO DEL USUARIO PARA PODER USARLO EN OTROS FLUJOS
         myState[ctx.from] = {...myState[ctx.from], token: token};
+        await extensions.utils.simulatingWriting(provider, {delay1: 550, delay2: 1200, ctx});
         return gotoFlow(menuOptions);
     });
 
