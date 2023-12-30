@@ -32,11 +32,15 @@ jobs:
     runs-on: self-hosted #ubuntu-latest
 
     steps:
-      #- name: Create directory work
-      # run: mkdir -p backend/app
 
       - name: Enter to the directory
-        run: cd /home/lrpa/Escritorio/trucking-bot
+        run: cd /home/lrpa/Escritorio/
+
+      - name: Delete directory session bot
+        run: rm -rf trucking-bot/bot_sessions/
+
+      - name: Create directory session bot
+        run: mkdir -p trucking-bot/bot_sessions/
 
       - name: Docker Instance Stop and remove
         run: docker rm -f zephyr-cygnus-bot
@@ -52,7 +56,7 @@ jobs:
           -e PUBLIC_KEY_IMAGEKIT=${{secrets.PUBLIC_KEY_IMAGEKIT}} \
           -e PRIVATE_KEY_IMAGEKIT=${{secrets.PRIVATE_KEY_IMAGEKIT}} \
           -e "URL_ENDPOINT_IMAGEKIT=https://ik.imagekit.io/ljpa/" \
-          -v "/home/lrpa/Escritorio/trucking-bot:/app/bot_sessions/ls" \
+          -v "/home/lrpa/Escritorio/trucking-bot/bot_sessions:/app/bot_sessions" \
           --restart always \
           --name zephyr-cygnus-bot \
           -p3000:3000 \
