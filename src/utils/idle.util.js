@@ -2,6 +2,7 @@ const {timeoutFlow} = require("../app/optionsflow/signout.flow");
 let timers = {};
 
 function idleStart(ctx, gotoFlow, time) {
+    console.log(`INICIAMOS cuenta atrás para el usuario ${ctx.from}!`);
     timers[ctx.from] = setTimeout(() => {
         console.log(`¡Tiempo agotado para el usuario ${ctx.from}!`);
         return gotoFlow(timeoutFlow);

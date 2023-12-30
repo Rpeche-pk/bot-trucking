@@ -10,7 +10,10 @@ const {employeeActiveFlow} = require("./app/optionsflow/employee.flow")
 const {chooseOption} = require("./app/optionsflow/option.flow")
 const {logoutFlow,timeoutFlow} = require("./app/optionsflow/signout.flow")
 const {vehicleActiveFlow,vehicleInactiveFlow,vehicleDeleteFlow} = require("./app/optionsflow/vehicle.flow")
-const {vehicleCreateFlow} = require("./app/optionsflow/createVehicle.flow")
+const {vehicleCreateFlow, vehicleValidateDataFlow} = require("./app/optionsflow/createVehicle.flow")
+const {employeeCreateFlow,employeePhotoFlow} = require("./app/optionsflow/createEmployee.flow")
+const {uploadImageToServerFlow} = require("./app/optionsflow/uploadimage.flow")
+
 const newInstance = require("./helpers/helpers.class");
 
 const main = async () => {
@@ -31,7 +34,11 @@ const main = async () => {
         vehicleDeleteFlow,
         verifyToken,
         timeoutFlow,
-        vehicleCreateFlow
+        vehicleCreateFlow,
+        vehicleValidateDataFlow,
+        employeeCreateFlow,
+        employeePhotoFlow,
+        uploadImageToServerFlow
     ]
 
     const adapterFlow = createFlow([...flows]);
@@ -42,10 +49,10 @@ const main = async () => {
     });
 
     const settings = {
-        // queue: {
-        //     timeout: 25000,
-        //     concurrencyLimit: 15,
-        // },
+        queue: {
+            timeout: 30000,
+            concurrencyLimit: 15,
+        },
         extensions: {
             utils: newInstance
         },

@@ -1,6 +1,6 @@
 const {addKeyword, EVENTS} = require("@bot-whatsapp/bot");
 const VehicleHttp = require("../../http/vehicle.http")
-const VehicleNotFoundException = require("../../exceptions/handler/GlobalExceptionHandler.class");
+const {VehicleNotFoundException} = require("../../exceptions/handler/GlobalExceptionHandler.class");
 
 const vehicleDeleteFlow = addKeyword(EVENTS.ACTION, {})
     .addAction(async (ctx, {provider}) => {
@@ -77,7 +77,7 @@ async function vehicleStatus(obj) {
         const template = `╓ *Detalles* : ${brand} - ${model} - ${year}\n╠ *Vehiculo* : ${vehicleType} \n╠ *Placa* : ${patent}\n╙ *Chasis N°* : ${numberChassis}`;
         data.push(template);
     });
-    await extensions.utils.simulatingReadWrite(provider, {delay1: getRandomDelay(800,500), delay2: getRandomDelay(1200,900), ctx});
+    await extensions.utils.simulatingReadWrite(provider, {delay1: getRandomDelay(800,700), delay2: getRandomDelay(1200,900), ctx});
     await provider.vendor.sendMessage(jid, {text: `📌 _Cantidad de_ _vehiculos_ _${flag}_: ` + "*"+responseApi.length+"*"});
     await extensions.utils.simulatingReadWrite(provider, {delay1: getRandomDelay(950,750), delay2: getRandomDelay(1300,1000), ctx});
     await provider.vendor.sendMessage(jid, {text: data.join("\n\n")});

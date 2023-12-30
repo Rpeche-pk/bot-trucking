@@ -2,10 +2,10 @@
   key: {
     remoteJid: '51966524537@s.whatsapp.net',
     fromMe: false,
-    id: '3EB0E76357FE5FC0733235',
+    id: '3EB0798BA173B06E00117C',
     participant: undefined
   },
-  messageTimestamp: 1703826074,
+  messageTimestamp: 1703921198,
   pushName: 'Gilmour Plant',
   broadcast: false,
   message: Message {
@@ -23,8 +23,8 @@
   from: '51966524537'
 }
 [QUEUE_SE_ENVIO]:  {
-  ref: 'ans_f7b5ef9f-501f-4ac5-90bd-5b1bb69d9deb',
-  keyword: 'key_6b61e2ef-567d-4122-8117-126a66695bdf',
+  ref: 'ans_a3ee4915-6166-4118-b0bf-5cd9ebf69aeb',
+  keyword: 'key_1c7ab85a-633d-47a5-b23f-fdf23dbd26c5',
   answer: '__call_action__',
   options: {
     media: null,
@@ -38,21 +38,21 @@
     keyword: {},
     callback: true
   },
-  refSerialize: 'f930c42de28de27e76c8a33570ed668f'
+  refSerialize: 'ed8d8ce9df4ed6fc8d5c1fb7360fb7d6'
 }
 [handleMsg]:  {
   key: {
     remoteJid: '51966524537@s.whatsapp.net',
     fromMe: false,
-    id: '3EB0698456CD12E702250B',
+    id: '3EB0AACE6816E43DAB4F89',
     participant: undefined
   },
-  messageTimestamp: 1703826081,
+  messageTimestamp: 1703921205,
   pushName: 'Gilmour Plant',
   broadcast: false,
   message: Message {
     extendedTextMessage: ExtendedTextMessage {
-      text: '4',
+      text: '7',
       contextInfo: [ContextInfo],
       inviteLinkGroupTypeV2: 0
     },
@@ -61,198 +61,42 @@
       deviceListMetadataVersion: 2
     }
   },
-  body: '4',
+  body: '7',
   from: '51966524537'
 }
 [handleMsg]:  {
   key: {
     remoteJid: '51966524537@s.whatsapp.net',
     fromMe: false,
-    id: '3EB03D93682FFAF12158CA',
+    id: '3EB0D8A2C214B8E8E00912',
     participant: undefined
   },
-  messageTimestamp: 1703826090,
+  messageTimestamp: 1703921220,
   pushName: 'Gilmour Plant',
   broadcast: false,
   message: Message {
-    extendedTextMessage: ExtendedTextMessage {
-      text: '3',
+    imageMessage: ImageMessage {
+      interactiveAnnotations: [],
+      scanLengths: [],
+      url: 'https://mmg.whatsapp.net/o1/v/t62.7118-24/f1/m237/up-oil-image-5fc07de3-c61c-4399-a13d-4ae4084e713c?ccb=9-4&oh=01_AdTWQJp1o-ZhQoxC6d1rKfc6E952PTdouqDeVGBXYICvSg&oe=65B746C5&_nc_sid=000000&mms3=true',
+      mimetype: 'image/jpeg',
+      fileSha256: [Uint8Array],
+      fileLength: [Long],
+      height: 863,
+      width: 863,
+      mediaKey: [Uint8Array],
+      fileEncSha256: [Uint8Array],
+      directPath: '/o1/v/t62.7118-24/f1/m237/up-oil-image-5fc07de3-c61c-4399-a13d-4ae4084e713c?ccb=9-4&oh=01_AdTWQJp1o-ZhQoxC6d1rKfc6E952PTdouqDeVGBXYICvSg&oe=65B746C5&_nc_sid=000000',
+      mediaKeyTimestamp: [Long],
+      jpegThumbnail: [Uint8Array],
       contextInfo: [ContextInfo],
-      inviteLinkGroupTypeV2: 0
+      viewOnce: false
     },
     messageContextInfo: MessageContextInfo {
       deviceListMetadata: [DeviceListMetadata],
       deviceListMetadataVersion: 2
     }
   },
-  body: '3',
-  from: '51966524537'
-}
-[QUEUE_SE_ENVIO]:  {
-  ref: 'ans_2e90eab1-fa03-47d0-8029-c7ed6ab69d24',
-  keyword: 'ans_a9ca9c1a-7b4f-4502-abee-6fe0d93b7731',
-  answer: '__capture_only_intended__',
-  options: {
-    media: null,
-    buttons: [],
-    capture: true,
-    child: null,
-    delay: 0,
-    idle: null,
-    ref: null,
-    nested: [],
-    keyword: {},
-    callback: true
-  },
-  refSerialize: 'c057c005cd322c8227dc8226062fde8c'
-}
-[handleMsg]:  {
-  key: {
-    remoteJid: '51966524537@s.whatsapp.net',
-    fromMe: false,
-    id: '3EB0C7D7FDAF9A2AD0639A',
-    participant: undefined
-  },
-  messageTimestamp: 1703826100,
-  pushName: 'Gilmour Plant',
-  broadcast: false,
-  message: Message {
-    extendedTextMessage: ExtendedTextMessage {
-      text: 'Chevrolet ,Camaro Z28, ABC123, 2015',
-      contextInfo: [ContextInfo],
-      inviteLinkGroupTypeV2: 0
-    },
-    messageContextInfo: MessageContextInfo {
-      deviceListMetadata: [DeviceListMetadata],
-      deviceListMetadataVersion: 2
-    }
-  },
-  body: 'Chevrolet ,Camaro Z28, ABC123, 2015',
-  from: '51966524537'
-}
-[QUEUE_SE_ENVIO]:  {
-  ref: 'ans_64279812-8041-482d-b875-ba44a9e5fda5',
-  keyword: 'ans_2e90eab1-fa03-47d0-8029-c7ed6ab69d24',
-  answer: '__capture_only_intended__',
-  options: {
-    media: null,
-    buttons: [],
-    capture: true,
-    child: null,
-    delay: 0,
-    idle: null,
-    ref: null,
-    nested: [],
-    keyword: {},
-    callback: true
-  },
-  refSerialize: '4143e5cf6dd4b6e7963e8fdb374eb2dc'
-}
-[handleMsg]:  {
-  key: {
-    remoteJid: '51966524537@s.whatsapp.net',
-    fromMe: false,
-    id: '3EB01F4BDA0DD4D98B5128',
-    participant: undefined
-  },
-  messageTimestamp: 1703826143,
-  pushName: 'Gilmour Plant',
-  broadcast: false,
-  message: Message {
-    extendedTextMessage: ExtendedTextMessage {
-      text: '3',
-      contextInfo: [ContextInfo],
-      inviteLinkGroupTypeV2: 0
-    },
-    messageContextInfo: MessageContextInfo {
-      deviceListMetadata: [DeviceListMetadata],
-      deviceListMetadataVersion: 2
-    }
-  },
-  body: '3',
-  from: '51966524537'
-}
-[QUEUE_SE_ENVIO]:  {
-  ref: 'ans_a94ddffe-d510-4461-9005-f4f5d366c886',
-  keyword: 'ans_64279812-8041-482d-b875-ba44a9e5fda5',
-  answer: '__capture_only_intended__',
-  options: {
-    media: null,
-    buttons: [],
-    capture: true,
-    child: null,
-    delay: 0,
-    idle: null,
-    ref: null,
-    nested: [],
-    keyword: {},
-    callback: true
-  },
-  refSerialize: 'b25fa31a5127bafe3110e2c964ab3ece'
-}
-[handleMsg]:  {
-  key: {
-    remoteJid: '51966524537@s.whatsapp.net',
-    fromMe: false,
-    id: '3EB0FFEF2674BB5C7A9031',
-    participant: undefined
-  },
-  messageTimestamp: 1703826155,
-  pushName: 'Gilmour Plant',
-  broadcast: false,
-  message: Message {
-    extendedTextMessage: ExtendedTextMessage {
-      text: '123456789, Scania',
-      contextInfo: [ContextInfo],
-      inviteLinkGroupTypeV2: 0
-    },
-    messageContextInfo: MessageContextInfo {
-      deviceListMetadata: [DeviceListMetadata],
-      deviceListMetadataVersion: 2
-    }
-  },
-  body: '123456789, Scania',
-  from: '51966524537'
-}
-[QUEUE_SE_ENVIO]:  {
-  ref: 'ans_537ab35c-bf46-4bca-a966-84c48fb446ad',
-  keyword: 'ans_a94ddffe-d510-4461-9005-f4f5d366c886',
-  answer: '__capture_only_intended__',
-  options: {
-    media: null,
-    buttons: [],
-    capture: true,
-    child: null,
-    delay: 0,
-    idle: null,
-    ref: null,
-    nested: [],
-    keyword: {},
-    callback: true
-  },
-  refSerialize: 'a4eedaf1d75cb454ba3c5d674223c76f'
-}
-[handleMsg]:  {
-  key: {
-    remoteJid: '51966524537@s.whatsapp.net',
-    fromMe: false,
-    id: '3EB0F90589E2856C2AFB1A',
-    participant: undefined
-  },
-  messageTimestamp: 1703826168,
-  pushName: 'Gilmour Plant',
-  broadcast: false,
-  message: Message {
-    extendedTextMessage: ExtendedTextMessage {
-      text: '123456789, Scania',
-      contextInfo: [ContextInfo],
-      inviteLinkGroupTypeV2: 0
-    },
-    messageContextInfo: MessageContextInfo {
-      deviceListMetadata: [DeviceListMetadata],
-      deviceListMetadataVersion: 2
-    }
-  },
-  body: '123456789, Scania',
+  body: '_event_media__501f3141-0eab-481f-bf0b-e48a402c2c90',
   from: '51966524537'
 }

@@ -1,4 +1,5 @@
 const {api} = require('./config');
+const {NotFoundDataException} = require("../exceptions/handler/GlobalExceptionHandler.class");
 
 const employeeActive = async (token) => {
     try {
@@ -11,8 +12,22 @@ const employeeActive = async (token) => {
         console.log(data)
         return data;
     } catch (error) {
-        console.error("Oops algo salio mal ",error.message)
+        console.error("Oops algo salio mal ",error.response.data)
+    }
+}
+const employeeCreateHttp = async (token,data) => {
+    try {
+        const bearerToken=token ? `Bearer ${token}` : ''
+        const {response} = await api.post(`/employee/newEmployee`,data, {
+            headers: {
+                Authorization: `${bearerToken}`
+            }
+        });
+        return response;
+    } catch (error) {
+        console.error("Oops algo salio mal ",error.response.data)
+        if (error.response.status === 400) throw new NotFoundDataException("El email ya existe, ingrese otro por favor");
     }
 }
 
-module.exports = {employeeActive};
+module.exports = {employeeActive,employeeCreateHttp};

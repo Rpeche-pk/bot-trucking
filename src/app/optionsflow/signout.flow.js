@@ -24,7 +24,7 @@ const timeoutFlow= addKeyword(EVENTS.ACTION,{})
     .addAction(async (ctx, {extensions,provider,endFlow}) => {
         try {
             const jid = ctx?.key?.remoteJid;
-            await extensions.utils.simulatingWriting(provider, {delay1: 500, delay2: 1000, ctx})
+            await extensions.utils.simulatingWriting(provider, {delay1: 650, delay2: 1000, ctx})
             await provider.vendor.sendMessage(jid, {text: "❌ Se ha agotado el tiempo de respuesta ❌"});
             return endFlow();
         } catch (e) {

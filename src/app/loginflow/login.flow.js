@@ -3,24 +3,31 @@ const {startLogin} = require("../../http/login.http")
 const {menuOptions} = require("../menuflow/menu.flow")
 const {hashPassword} = require("../../helpers/encryptCredentials")
 const {idleReset, idleStop, idleStart} = require("../../utils/idle.util");
+const ENV = require("../../utils/enviroments.js");
 
+const {URL_IMAGE_BOT2} = ENV();
 // Validate info user
 const validateInfo = addKeyword(EVENTS.ACTION, {})
-    .addAction(async (ctx, {extensions,provider, state, gotoFlow}) => {
+    .addAction(async (ctx, {extensions, provider, state, gotoFlow, flowDynamic}) => {
         idleStop(ctx);
         const jid = ctx?.key?.remoteJid;
-        const idUser= ctx?.from;
+        const idUser = ctx?.from;
         const myState = state.getMyState();
         const {email, password} = myState[ctx?.from];
         const response = await startLogin(email, password);
         const {name, lastName, companyName} = response.user;
         //ENCRIPTAMOS EL PASSWORD POR SEGURIDAD
-        const encryptPass= await hashPassword(password)
-        myState[ctx?.from] = {...myState[ctx?.from],password:encryptPass,token: response.token};
+        const encryptPass = await hashPassword(password)
+        myState[ctx?.from] = {...myState[ctx?.from], password: encryptPass, token: response.token};
         //GUARDAMOS EL ESTADO DEL USUARIO EN UN ARCHIVO JSON
         await extensions.utils.writeFile(`src/app/data/${idUser}.json`, myState);
-        await extensions.utils.simulatingReadWrite(provider, {delay1: 500, delay2: 1100, ctx})
-        const responseWA = await provider.vendor.sendMessage(jid, {text: `📌 Bienvenido ${name} ${lastName} de la compañia ${companyName} 🤝🏽`});
+        await extensions.utils.simulatingReadWrite(provider, {delay1: 500, delay2: 1000, ctx})
+        const responseWA = await provider.vendor.sendMessage(jid,
+            {
+                image: {url: URL_IMAGE_BOT2[Math.floor(Math.random() * URL_IMAGE_BOT2.length)]},
+                caption: `📌 Bienvenido ${name} ${lastName} de la compañia ${companyName} 🤝🏽`,
+                jpegThumbnail: "image/jpeg"
+            });
         await extensions.utils.wait(500);
         await provider.vendor.sendMessage(jid, {react: {key: responseWA.key, text: "👍🏽"}});
         await extensions.utils.simulatingWriting(provider, {delay1: 500, delay2: 1100, ctx});
@@ -30,11 +37,11 @@ const validateInfo = addKeyword(EVENTS.ACTION, {})
     });
 
 const loginFlow = addKeyword(EVENTS.ACTION, {})
-    .addAction(async (ctx, {gotoFlow,globalState}) => {
+    .addAction(async (ctx, {gotoFlow, globalState}) => {
         idleStart(ctx, gotoFlow, globalState.getMyState().timer);
     })
     .addAnswer("📌╠ Ingrese su username o email:", {capture: true, delay: 500},
-        async (ctx, {extensions,provider, fallBack, globalState,state,gotoFlow}) => {
+        async (ctx, {extensions, provider, fallBack, globalState, state, gotoFlow}) => {
             idleReset(ctx, gotoFlow, globalState.getMyState().timer);
             const username = ctx?.body.trim();
             const from = ctx?.from
@@ -46,7 +53,7 @@ const loginFlow = addKeyword(EVENTS.ACTION, {})
             await extensions.utils.simulatingReadWrite(provider, {delay1: 500, delay2: 1100, ctx})
         })
     .addAnswer("📌╠ Ingrese su password:", {capture: true},
-        async (ctx, {extensions,provider, globalState, state, fallBack,gotoFlow}) => {
+        async (ctx, {extensions, provider, globalState, state, fallBack, gotoFlow}) => {
             idleReset(ctx, gotoFlow, globalState.getMyState().timer);
             const password = ctx?.body.trim();
             const jid = ctx?.key?.remoteJid;
@@ -77,7 +84,7 @@ const loginFlow = addKeyword(EVENTS.ACTION, {})
             //provider.vendor.sendMessage(jid, { delete: reponseWA.key })
             //console.log("TIMESTAMP", new Date(Date.now() + 60 * 1000).getTime())
         })
-    .addAction(async (ctx, {extensions,provider, gotoFlow}) => {
+    .addAction(async (ctx, {extensions, provider, gotoFlow}) => {
         const id = ctx?.key?.remoteJid
         try {
             await extensions.utils.wait(500);

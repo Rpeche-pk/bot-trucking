@@ -21,10 +21,10 @@
         "cache-manager": "5.2.4",
         "dayjs": "^1.11.10",
         "dotenv": "^16.3.1",
+        "imagekit": "^4.1.4",
         "jwt-decode": "^4.0.0",
         "link-preview-js": "^3.0.5",
         "mime-types": "2.1.35",
-        "speakeasy": "^2.0.0",
         "wa-sticker-formatter": "4.4.4"
     },
     "devDependencies": {

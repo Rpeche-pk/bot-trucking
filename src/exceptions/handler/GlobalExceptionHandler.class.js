@@ -13,10 +13,15 @@ class VehicleNotFoundException extends GlobalExceptionHandler{
     }
 }
 
+class NotFoundDataException extends GlobalExceptionHandler{
+    constructor(message) {
+        super(message);
+    }
+}
 class OptionNotValidException extends GlobalExceptionHandler{
     constructor(message) {
         super(message);
     }
 }
 
-module.exports = VehicleNotFoundException;
+module.exports = {VehicleNotFoundException,NotFoundDataException,OptionNotValidException};

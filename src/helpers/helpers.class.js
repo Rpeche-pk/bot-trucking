@@ -121,7 +121,7 @@ class HelpersClass {
             let msgIntents = intents === 1 ? "Tienes 1 intento." : `Tienes ${intents} intentos.`;
             await this.simulatingReadWrite(ctxFn.provider, {
                 delay1: 500,
-                delay2: 1100,
+                delay2: 1000,
                 ctx
             });
             return ctxFn.fallBack({body: msgIntents});

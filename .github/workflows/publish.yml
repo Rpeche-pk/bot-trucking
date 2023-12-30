@@ -48,6 +48,10 @@ jobs:
         run: |
           docker run -d \
           -e "PHONE_NUMBER=51979838018" \
+          -e "URL_ENDPOINT_IMAGEKIT=https://ik.imagekit.io/ljpa/" \
+          -e PUBLIC_KEY_IMAGEKIT=${{secrets.PUBLIC_KEY_IMAGEKIT}} \
+          -e PRIVATE_KEY_IMAGEKIT=${{secrets.PRIVATE_KEY_IMAGEKIT}} \
+          -e "URL_ENDPOINT_IMAGEKIT=https://ik.imagekit.io/ljpa/" \
           -v "/home/lrpa/Escritorio/trucking-bot:/app/bot_sessions" \
           --restart always \
           --name zephyr-cygnus-bot \

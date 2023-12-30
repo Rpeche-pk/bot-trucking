@@ -6,7 +6,7 @@ const REGEX_EXIT = /\/salir/i;
 const chooseOption = addKeyword(EVENTS.ACTION, {})
     .addAction(async (ctx, {extensions,provider, gotoFlow, globalState}) => {
         idleStart(ctx, gotoFlow, globalState.getMyState().timer);
-        await extensions.utils.simulatingWriting(provider, {delay1: 500, delay2: 800, ctx})
+        //await extensions.utils.simulatingWriting(provider, {delay1: 500, delay2: 800, ctx})
     })
     .addAnswer([
         "💁🏽‍♀️ Si desea hacer otra consulta, escriba:",

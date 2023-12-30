@@ -1,6 +1,6 @@
 const {api} = require('./config');
 const ENV = require('../utils/enviroments');
-const VehicleNotFoundException = require("../exceptions/handler/GlobalExceptionHandler.class");
+const {VehicleNotFoundException} = require("../exceptions/handler/GlobalExceptionHandler.class");
 
 class VehicleHttp {
     ENDPOINT_VEHICLE_ACTIVE;
@@ -81,9 +81,8 @@ class VehicleHttp {
                 }
             }
             const response = await api.post(`/vehicle/save`, data, config);
-            console.log("STATUS->>>>>",response.status)
         } catch (error) {
-            console.error("Oops algo salio mal ", error.message)
+            console.error("Oops algo salio mal ", error.data.message)
         }
     }
 

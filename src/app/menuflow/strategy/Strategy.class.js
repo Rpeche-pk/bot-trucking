@@ -1,8 +1,11 @@
 const {idleStop} = require("../../../utils/idle.util");
 const {employeeActiveFlow} = require("../../optionsflow/employee.flow");
 const {vehicleActiveFlow, vehicleInactiveFlow,vehicleDeleteFlow} = require("../../optionsflow/vehicle.flow");
-const OptionNotValidException = require("../../../exceptions/handler/GlobalExceptionHandler.class");
+const {OptionNotValidException} = require("../../../exceptions/handler/GlobalExceptionHandler.class");
 const {vehicleCreateFlow} = require("../../optionsflow/createVehicle.flow");
+const {employeeCreateFlow} = require("../../optionsflow/createEmployee.flow");
+const {logoutFlow} = require("../../optionsflow/signout.flow");
+const {uploadImageToServerFlow} = require("../../optionsflow/uploadimage.flow");
 
 class Strategy {
 
@@ -33,7 +36,6 @@ class Strategy {
     case4 = async (ctx, ctxFn) => {
         console.log("4️⃣ Agregar un nuevo *vehículo*");
         idleStop(ctx);
-        const jid = ctx?.key?.remoteJid;
         return ctxFn.gotoFlow(vehicleCreateFlow);
     }
 
@@ -44,23 +46,21 @@ class Strategy {
     }
 
     case6 = async (ctx, ctxFn) => {
-        const jid = ctx?.key?.remoteJid;
-        await ctxFn.provider.vendor.sendMessage(jid, {text: "📌 Aún falta implementar esta funcionalidad"});
-        return ctxFn.endFlow();
+        console.log("6️⃣ Crear perfil de empleado")
+        idleStop(ctx);
+        return ctxFn.gotoFlow(employeeCreateFlow);
     }
 
     case7 = async (ctx, ctxFn) => {
-        console.log("8️⃣ Eliminar empleado")
-        const jid = ctx?.key?.remoteJid;
-        await ctxFn.provider.vendor.sendMessage(jid, {text: "📌 Aún falta implementar esta funcionalidad"});
-        return ctxFn.endFlow();
+        console.log("7️⃣ SUBIR IMAGEN AL SERVIDOR")
+        idleStop(ctx);
+        return ctxFn.gotoFlow(uploadImageToServerFlow);
     }
 
     case8 = async (ctx, ctxFn)=> {
-        console.log("8️⃣ Eliminar empleado")
-        const jid = ctx?.key?.remoteJid;
-        await ctxFn.provider.vendor.sendMessage(jid, {text: "📌 Aún falta implementar esta funcionalidad"});
-        return ctxFn.endFlow();
+        console.log("8️⃣ Salir")
+        idleStop(ctx)
+        return ctxFn.gotoFlow(logoutFlow);
     }
 
     default= ()=> {
@@ -69,5 +69,5 @@ class Strategy {
     }
 }
 const strategy = new Strategy();
-Object.freeze(strategy)
+//Object.freeze(strategy)
 module.exports = strategy;

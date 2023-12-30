@@ -21,7 +21,7 @@ const employeeActiveFlow = addKeyword(EVENTS.ACTION, {})
             const lengthArray = data.length;
             await extensions.utils.simulatingReadWrite(provider, {delay1: 500, delay2: 1000, ctx});
             await provider.vendor.sendMessage(jid, {text: "Cantidad de empleados activos: " + lengthArray + "\n\n📌 Los empleados más activos son:"});
-            await extensions.utils.simulatingReadWrite(provider, {delay1: 500, delay2: 1100, ctx});
+            await extensions.utils.simulatingReadWrite(provider, {delay1: 600, delay2: 1250, ctx});
             await provider.vendor.sendMessage(jid, {text: data.join("\n\n")});
             await extensions.utils.wait(500);
 

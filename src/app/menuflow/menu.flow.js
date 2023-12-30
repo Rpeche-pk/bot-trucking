@@ -1,7 +1,7 @@
 const {addKeyword} = require("@bot-whatsapp/bot");
-const {idleStart} = require("../../utils/idle.util");
+const {idleStart, idleStop} = require("../../utils/idle.util");
 const strategy = require("./strategy/Strategy.class");
-const OptionNotValidException = require("../../exceptions/handler/GlobalExceptionHandler.class");
+const {OptionNotValidException} = require("../../exceptions/handler/GlobalExceptionHandler.class");
 let intents = 2;
 const menuOptions = addKeyword("/menu", {})
     .addAction(async (ctx, {gotoFlow, globalState}) => {
@@ -14,8 +14,8 @@ const menuOptions = addKeyword("/menu", {})
             "╠3️⃣ Consultar vehiculos *inactivos*",
             "╠4️⃣ Agregar un nuevo *vehículo*",
             "╠5️⃣ Dar de baja un *vehículo*",
-            "╠6️⃣ Agregar registro de *mantenimiento*",
-            "╠7️⃣ Eliminar *empleado*",
+            "╠6️⃣ Crear perfil de *empleado*",
+            "╠7️⃣ SUBIR *IMAGEN* AL *SERVIDOR*",
             "╚8️⃣ *Salir*",
         ], {capture: true, delay: 500, sensitive: true},
         async (ctx, ctxFn) => {
@@ -29,6 +29,7 @@ const menuOptions = addKeyword("/menu", {})
                     await ctxFn.extensions.utils.tryAgain(intents, ctxFn, {state, ctx});
                     intents--;
                 }
+                console.log("ESTADO DESDE MENU OPTIONS", state, answer)
                 const strategyMethod = strategy[`case${answer}`] || strategy.default();
                 await strategyMethod(ctx, ctxFn);
             } catch (e) {
