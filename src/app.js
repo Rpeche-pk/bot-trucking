@@ -1,6 +1,6 @@
 require("dotenv").config();
 const {createBot, createProvider, createFlow} = require("@bot-whatsapp/bot");
-//const QRPortalWeb = require("@bot-whatsapp/portal");
+const QRPortalWeb = require("@bot-whatsapp/portal");
 const BaileysProvider = require("@bot-whatsapp/provider/baileys");
 const JsonFileAdapter = require("@bot-whatsapp/database/json");
 const {welcomeFlow, offFlow, onFlow, startChat,verifyToken} = require("./app/welcomeflow/welcome.flow");
@@ -66,7 +66,7 @@ const main = async () => {
         provider: adapterProvider,
         database: adapterDB,
     },settings);
-    //QRPortalWeb();
+    QRPortalWeb({port:3001});
 };
 
 main().then(() => console.log("Bot iniciado correctamente 😎🚀"));
