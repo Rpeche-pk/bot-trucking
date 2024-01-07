@@ -1,10 +1,11 @@
 node_modules
 .env
-bot_sessions/
-core.class.log
-queue.class.log
-bot.qr.png
+bot_sessions/*
+*.log
+*.png
+public/*
 db.json
+!public/.gitkeep
 .vscode/
 .idea/
 # Default ignored files
