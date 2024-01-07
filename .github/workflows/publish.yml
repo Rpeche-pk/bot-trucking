@@ -59,5 +59,4 @@ jobs:
           -v "/home/lrpa/Escritorio/trucking-bot/bot_sessions:/app/bot_sessions" \
           --restart always \
           --name zephyr-cygnus-bot \
-          -p3001:3001 \
           ${{ secrets.DOCKERHUB_USERNAME }}/trucking-bot:latest

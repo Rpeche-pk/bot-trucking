@@ -5,6 +5,7 @@ const {jwtDecode} = require("jwt-decode");
 const {loginFlow} = require("../loginflow/login.flow")
 const {menuOptions} = require("../menuflow/menu.flow");
 const {idleStart, idleStop,idleReset} = require("../../utils/idle.util");
+const chalk = require("chalk");
 
 const greeting = randomGreeting();
 const {URL_IMAGE_BOT, URL_IMAGE_BOT2} = ENV();
@@ -19,7 +20,7 @@ const offFlow = addKeyword(REGEX_ASESOR, {regex: true}).addAction(async (ctx, {f
     try {
         userPhone[ctx.from] = {...userPhone[ctx.from], on: false}; //encendido true que viene a ser false xddd
         await state.update(userPhone);
-        console.log("BOT APAGADO -> ", userPhone);
+        console.log(chalk.bgCyan("BOT APAGADO -> "), chalk.cyan(JSON.stringify(userPhone)));
         await flowDynamic("En unos instantes el asesor se comunicará con usted...");
     } catch (error) {
         console.error("ERROR FLUJO offFlow", error);
@@ -30,7 +31,7 @@ const onFlow = addKeyword(REGEX_KEYWORD, {regex: true}).addAction(async (ctx, {p
     try {
         userPhone[ctx.from] = {...userPhone[ctx.from], on: true};
         await state.update(userPhone);
-        console.log("BOT ENCENDIDO-> ", userPhone);
+        console.log(chalk.bgCyan("BOT ENCENDIDO-> "),  chalk.cyan(JSON.stringify(userPhone)));
         return gotoFlow(verifyToken);
     } catch (error) {
         console.error("ERROR FLUJO onFlow", error);
@@ -50,10 +51,7 @@ const verifyToken = addKeyword(EVENTS.ACTION, {})
 
         const data = await extensions.utils.readFile(fileUser);
 
-        console.log("DATA", data)
-
         const token = data[ctx.from]?.token;
-        console.log("TOKEN", token)
 
         if (!token) {
             await extensions.utils.simulatingWriting(provider, {delay1: 500, delay2: 850, ctx});
@@ -124,11 +122,10 @@ const welcomeFlow = addKeyword([EVENTS.WELCOME, EVENTS.VOICE_NOTE], {})
                 //!estado || !estado.encendido
                 userPhone[phoneNumber] = {...userPhone[phoneNumber], on: true};
                 await ctxFn.state.update(userPhone);
-                console.log(userPhone)
             }
 
             if (!userPhone[phoneNumber].on) {
-                console.log("BOT APAGADO desde welcomeFlow -> ", userPhone);
+                console.log(chalk.bgBlue("BOT APAGADO desde welcomeFlow -> "), chalk.blue.bold(JSON.stringify(userPhone)));
                 return ctxFn.endFlow();
             }
             await ctxFn.extensions.utils.simulatingReadWrite(ctxFn.provider, {

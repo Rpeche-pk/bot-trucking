@@ -1,6 +1,6 @@
 const {addKeyword, EVENTS} = require("@bot-whatsapp/bot");
-
-const logoutFlow = addKeyword(EVENTS.ACTION,{})
+const REGESX_EXIT= '/#exit/g';
+const logoutFlow = addKeyword(REGESX_EXIT,{regex: true})
     .addAction(async (ctx, {extensions,provider,flowDynamic, state,endFlow}) => {
         try {
             const from = ctx?.from;
@@ -14,9 +14,10 @@ const logoutFlow = addKeyword(EVENTS.ACTION,{})
             await extensions.utils.simulatingWriting(provider, {delay1: 559, delay2: 850, ctx});
             await flowDynamic([{body:"👾 @Author @Rpeche-pk"}]);
             await extensions.utils.simulatingWriting(provider, {delay1: 550, delay2: 1100, ctx});
-            await provider.vendor.sendMessage(jid, {
+            const baileys = await provider.vendor.sendMessage(jid, {
                 text: "https://github.com/Rpeche-pk",
             });
+            await extensions.handler.sendMessageWoot(baileys, ctx?.from, ctx?.pushName);
             return endFlow();
         } catch (error) {
             console.error("ERROR FLUJO offFlow", error);
@@ -28,7 +29,8 @@ const timeoutFlow= addKeyword(EVENTS.ACTION,{})
         try {
             const jid = ctx?.key?.remoteJid;
             await extensions.utils.simulatingWriting(provider, {delay1: 650, delay2: 1000, ctx})
-            await provider.vendor.sendMessage(jid, {text: "❌ Se ha agotado el tiempo de respuesta ❌"});
+            const baileys= await provider.vendor.sendMessage(jid, {text: "❌ Se ha agotado el tiempo de respuesta ❌"});
+            await extensions.handler.sendMessageWoot(baileys, ctx?.from, ctx?.pushName);
             return endFlow();
         } catch (e) {
             console.error("Error en el flujo timeoutFlow", e)

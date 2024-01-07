@@ -15,7 +15,8 @@ const startLogin = async (email, password) => {
         console.log(data)
         return data;
     } catch (error) {
-        console.log('Error en la autenticación', error.response.data?.details.toString(), error.response.status)
+        console.log(error)
+        console.log('Error en la autenticación', error.response, error.response.status)
     }
 }
 

@@ -1,6 +1,6 @@
 const {addKeyword, EVENTS} = require("@bot-whatsapp/bot");
-const {idleStart, idleReset, idleStop} = require("../../utils/idle.util");
-const {uploadToServerImage} = require("../../utils/uploadImages");
+const {idleStart, idleStop} = require("../../utils/idle.util");
+const {uploadToServerImage} = require("../../utils/strategy/download.util");
 
 let intents = 2;
 const uploadImageToServerFlow = addKeyword(EVENTS.ACTION, {})

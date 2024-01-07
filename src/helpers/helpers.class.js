@@ -162,7 +162,6 @@ class HelpersClass {
     readFile = async (file) => {
         try {
             const data = await fs.readFile(file, 'utf8');
-            console.log("DATA -> ->", data)
             return JSON.parse(data);
         } catch (e) {
             console.error("Error al leer el archivo");

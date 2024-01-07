@@ -24,7 +24,7 @@ const vehicleDeleteFlow = addKeyword(EVENTS.ACTION, {})
                 await provider.vendor.sendMessage(jid, {react: {key: responseWA?.key, text: "✅"}});
                 await extensions.utils.wait(500);
                 await extensions.utils.simulatingWriting(provider, {delay1: 500, delay2: 1100, ctx});
-                await gotoFlow(chooseOption);
+                return gotoFlow(chooseOption);
             } catch (e) {
                 console.error("ERROR FLUJO vehicleDeleteFlow", e.message)
                 e instanceof VehicleNotFoundException ? await provider.vendor.sendMessage(ctx?.key?.remoteJid, {"text": "‼ "+e.message}) : console.error(e);
@@ -45,7 +45,7 @@ const vehicleInactiveFlow = addKeyword(EVENTS.ACTION, {})
             extensions
         })
         await extensions.utils.simulatingWriting(provider, {delay1: 560, delay2: 1110, ctx});
-        await gotoFlow(chooseOption);
+        return gotoFlow(chooseOption);
     });
 
 const vehicleActiveFlow = addKeyword(EVENTS.ACTION, {})
@@ -62,7 +62,7 @@ const vehicleActiveFlow = addKeyword(EVENTS.ACTION, {})
             extensions
         })
         await extensions.utils.simulatingWriting(provider, {delay1: 550, delay2: 1100, ctx});
-        await gotoFlow(chooseOption);
+        return gotoFlow(chooseOption);
     });
 
 

@@ -1,9 +1,7 @@
 const {addKeyword, EVENTS} = require("@bot-whatsapp/bot");
 const {idleStart, idleReset, idleStop} = require("../../utils/idle.util");
-const {uploadToServerImage} = require("../../utils/uploadImages");
+const {uploadToServerImage} = require("../../utils/strategy/download.util");
 const {employeeCreateHttp} = require("../../http/user.http");
-const {NotFoundDataException} = require("../../exceptions/handler/GlobalExceptionHandler.class");
-const {chooseOption} = require("./option.flow");
 let intents = 2;
 
 const roleEmployeeFlow = {
@@ -11,7 +9,7 @@ const roleEmployeeFlow = {
     "2": "OWNER",
     "3": "MAINTENANCE"
 }
-
+// todo crear flujo para subir foto de empleado, VERIFICA QUE EL MENSAJE ES UN MEDIA
 const employeePhotoFlow = addKeyword(EVENTS.ACTION, {})
     .addAction(async (ctx, {gotoFlow, globalState}) => {
       idleStart(ctx, gotoFlow, globalState.getMyState().timer);
@@ -24,7 +22,8 @@ const employeePhotoFlow = addKeyword(EVENTS.ACTION, {})
             myState = ctxFn.state.getMyState();
 
             await ctxFn.provider.vendor.readMessages([ctx?.key]);
-            if (!ctx?.message?.imageMessage) {
+            // TODO VERIFICA QUE EL MENSAJE ES UN MEDIA
+            if (!ctx?.message?.imageMessage || !ctx.message?.extendedTextMessage?.contextInfo?.quotedMessage?.imageMessage) {
                 await ctxFn.extensions.utils.simulatingWriting(ctxFn.provider, {delay1: 500, delay2: 800, ctx});
                 await ctxFn.flowDynamic([{body: "💁🏻‍♀️ Ingrese una foto válida, por favor"}]);
                 await ctxFn.extensions.utils.tryAgain(intents, ctxFn, {ctx});
@@ -37,8 +36,6 @@ const employeePhotoFlow = addKeyword(EVENTS.ACTION, {})
             const token = myState[ctx?.from].token;
 
             myState[ctx?.from] = {...myState[ctx?.from], data: {...myState[ctx?.from].data, photo: response["url"]}};
-            console.log("flujo employeePhotoFlow-> ", myState)
-
             await employeeCreateHttp(token,myState[ctx?.from].data);
 
         } catch (e) {

@@ -29,7 +29,6 @@ const menuOptions = addKeyword("/menu", {})
                     await ctxFn.extensions.utils.tryAgain(intents, ctxFn, {state, ctx});
                     intents--;
                 }
-                console.log("ESTADO DESDE MENU OPTIONS", state, answer)
                 const strategyMethod = strategy[`case${answer}`] || strategy.default();
                 await strategyMethod(ctx, ctxFn);
             } catch (e) {
