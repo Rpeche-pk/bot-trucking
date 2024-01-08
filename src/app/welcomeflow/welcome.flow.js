@@ -16,12 +16,13 @@ let userPhone = {};
 let flag = 2; //intentos
 
 //2° Dependiedo lo que escriba el usuario dentro de las palabras claves se ejecuta un flujo (#empezar o #asesor)
-const offFlow = addKeyword(REGEX_ASESOR, {regex: true}).addAction(async (ctx, {flowDynamic, state}) => {
+const offFlow = addKeyword(REGEX_ASESOR, {regex: true}).addAction(async (ctx, {extensions,flowDynamic, state,provider}) => {
     try {
         userPhone[ctx.from] = {...userPhone[ctx.from], on: false}; //encendido true que viene a ser false xddd
         await state.update(userPhone);
         console.log(chalk.bgCyan("BOT APAGADO -> "), chalk.cyan(JSON.stringify(userPhone)));
-        await flowDynamic("En unos instantes el asesor se comunicará con usted...");
+        const ctxBaileys=await provider.vendor.sendMessage(ctx?.key?.remoteJid,{text:"En unos instantes el asesor se comunicará con usted..."},{quoted: ctx});
+        await extensions.handler.sendMessageWoot(ctxBaileys, ctx?.from, ctx?.pushName); 
     } catch (error) {
         console.error("ERROR FLUJO offFlow", error);
     }
