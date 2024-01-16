@@ -4,7 +4,7 @@
   <img src="https://ik.imagekit.io/ljpa/Proyectos/logo_trucking.png" alt="Architecture">
 </p>
 
-**Este pryecto es una contiación del proyecto https://github.com/No-Country/s12-14-t-java-react**, **sitio web [🚙TRUCKING](https://s12-14-t-java-react.vercel.app/)**
+## **Este proyecto es una continuación del proyecto https://github.com/No-Country/s12-14-t-java-react**, **sitio web [🚙TRUCKING](https://s12-14-t-java-react.vercel.app/)**
 
 **Con esta librería, puedes construir flujos automatizados de conversación de manera agnóstica al proveedor de WhatsApp,** configurar respuestas automatizadas para preguntas frecuentes, recibir y responder mensajes de manera automatizada, y hacer un seguimiento de las interacciones con los clientes.  Además, puedes configurar fácilmente disparadores que te ayudaran a expandir las funcionalidades sin límites. **[Ver documentación](https://bot-whatsapp.netlify.app/)**
 
